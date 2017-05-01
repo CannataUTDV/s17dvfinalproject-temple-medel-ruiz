@@ -1,0 +1,1517 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 10100.17.0207.2140                               -->
+<workbook source-build='10.1.5 (10100.17.0207.2140)' source-platform='win' version='10.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='data.world connector' inline='true' name='federated.1a388xv05i6q3d10xbzhs0hmqgfl' version='10.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='data.world connector' name='webdata-direct.19o64ch054x3x9150dtpy16elter'>
+            <connection APIVersion='' authType='none' authentication='no' channel='https' class='webdata-direct' connectionData='{&quot;dataset&quot;:&quot;pavilionall/s-17-dv-project-6&quot;,&quot;apiToken&quot;:&quot;eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcm9kLXVzZXItY2xpZW50OmZlcm5hbmRvcnVpeiIsImlzcyI6ImFnZW50OmZlcm5hbmRvcnVpejo6NmNjODQ5ODktOTJhYS00OTRjLTk5MWQtODgwMTc4MmI0NDI5IiwiaWF0IjoxNDg0Njk3MzAzLCJyb2xlIjpbInVzZXJfYXBpX3dyaXRlIiwidXNlcl9hcGlfcmVhZCJdLCJnZW5lcmFsLXB1cnBvc2UiOnRydWV9.39MCSG-bnjjoaMUsOVErEGUxkk4ONQTDPXp9fn6rnnB6VG0guuOX0Km8StzlLCx1lFxbPERrd18iSpfrFJKROg&quot;}' connectionName='data.world connector' filename='' increment-key='' path='/' port='443' scriptVersion='' secondary_whitelist='' server='tableau.data.world' urlQuery='' username='' usernameAlias='' />
+          </named-connection>
+        </named-connections>
+        <relation join='left' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[energyByStateClean].[v_1]' />
+              <expression op='[censusMedianHousingExpenses].[v_0]' />
+            </expression>
+          </clause>
+          <relation connection='webdata-direct.19o64ch054x3x9150dtpy16elter' name='energyByStateClean' table='[energyByStateClean]' type='table' />
+          <relation connection='webdata-direct.19o64ch054x3x9150dtpy16elter' name='censusMedianHousingExpenses' table='[censusMedianHousingExpenses]' type='table' />
+        </relation>
+        <cols>
+          <map key='[v_0 (censusMedianHousingExpenses)]' value='[censusMedianHousingExpenses].[v_0]' />
+          <map key='[v_0]' value='[energyByStateClean].[v_0]' />
+          <map key='[v_1 (censusMedianHousingExpenses)]' value='[censusMedianHousingExpenses].[v_1]' />
+          <map key='[v_10]' value='[energyByStateClean].[v_10]' />
+          <map key='[v_11]' value='[energyByStateClean].[v_11]' />
+          <map key='[v_12]' value='[energyByStateClean].[v_12]' />
+          <map key='[v_13]' value='[energyByStateClean].[v_13]' />
+          <map key='[v_14]' value='[energyByStateClean].[v_14]' />
+          <map key='[v_15]' value='[energyByStateClean].[v_15]' />
+          <map key='[v_16]' value='[energyByStateClean].[v_16]' />
+          <map key='[v_17]' value='[energyByStateClean].[v_17]' />
+          <map key='[v_18]' value='[energyByStateClean].[v_18]' />
+          <map key='[v_1]' value='[energyByStateClean].[v_1]' />
+          <map key='[v_2]' value='[energyByStateClean].[v_2]' />
+          <map key='[v_3]' value='[energyByStateClean].[v_3]' />
+          <map key='[v_4]' value='[energyByStateClean].[v_4]' />
+          <map key='[v_5]' value='[energyByStateClean].[v_5]' />
+          <map key='[v_6]' value='[energyByStateClean].[v_6]' />
+          <map key='[v_7]' value='[energyByStateClean].[v_7]' />
+          <map key='[v_8]' value='[energyByStateClean].[v_8]' />
+          <map key='[v_9]' value='[energyByStateClean].[v_9]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>v_0</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[v_0]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>0</ordinal>
+            <caption>State</caption>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;string&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_1</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[v_1]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Abbreviation</remote-alias>
+            <ordinal>1</ordinal>
+            <caption>Abbreviation</caption>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;string&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_2</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[v_2]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Region</remote-alias>
+            <ordinal>2</ordinal>
+            <caption>Region</caption>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;string&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_3</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_3]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Biomass</remote-alias>
+            <ordinal>3</ordinal>
+            <caption>Biomass</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_4</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_4]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Geothermal</remote-alias>
+            <ordinal>4</ordinal>
+            <caption>Geothermal</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_5</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_5]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Solar</remote-alias>
+            <ordinal>5</ordinal>
+            <caption>Solar</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_6</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_6]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Wind</remote-alias>
+            <ordinal>6</ordinal>
+            <caption>Wind</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_7</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_7]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Hydro</remote-alias>
+            <ordinal>7</ordinal>
+            <caption>Hydro</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_8</remote-name>
+            <remote-type>0</remote-type>
+            <local-name>[v_8]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>HPS</remote-alias>
+            <ordinal>8</ordinal>
+            <caption>HPS</caption>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;int&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_9</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_9]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Coal</remote-alias>
+            <ordinal>9</ordinal>
+            <caption>Coal</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_10</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_10]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Petroleum</remote-alias>
+            <ordinal>10</ordinal>
+            <caption>Petroleum</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_11</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_11]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Gas</remote-alias>
+            <ordinal>11</ordinal>
+            <caption>Gas</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_12</remote-name>
+            <remote-type>0</remote-type>
+            <local-name>[v_12]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Nuclear</remote-alias>
+            <ordinal>12</ordinal>
+            <caption>Nuclear</caption>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;int&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_13</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_13]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Other</remote-alias>
+            <ordinal>13</ordinal>
+            <caption>Other</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_14</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_14]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Non-hydro RE Generation (MWh)</remote-alias>
+            <ordinal>14</ordinal>
+            <caption>Non-hydro RE Generation (MWh)</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_15</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_15]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Total RE Generation (MWh)</remote-alias>
+            <ordinal>15</ordinal>
+            <caption>Total RE Generation (MWh)</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_16</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_16]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Total Generation (MWh)</remote-alias>
+            <ordinal>16</ordinal>
+            <caption>Total Generation (MWh)</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_17</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_17]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Non-Hydro Renewable Percent Total Generation</remote-alias>
+            <ordinal>17</ordinal>
+            <caption>Non-Hydro Renewable Percent Total Generation</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_18</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[v_18]</local-name>
+            <parent-name>[energyByStateClean]</parent-name>
+            <remote-alias>Renewable Percent Total Generation</remote-alias>
+            <ordinal>18</ordinal>
+            <caption>Renewable Percent Total Generation</caption>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;float&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_0</remote-name>
+            <remote-type>2</remote-type>
+            <local-name>[v_0 (censusMedianHousingExpenses)]</local-name>
+            <parent-name>[censusMedianHousingExpenses]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>19</ordinal>
+            <caption>State</caption>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;string&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>v_1</remote-name>
+            <remote-type>0</remote-type>
+            <local-name>[v_1 (censusMedianHousingExpenses)]</local-name>
+            <parent-name>[censusMedianHousingExpenses]</parent-name>
+            <remote-alias>medianMonthlyHousingCost</remote-alias>
+            <ordinal>20</ordinal>
+            <caption>medianMonthlyHousingCost</caption>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='RemoteTypeName'>&quot;int&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Diffence of Percent Renewable' datatype='real' name='[Calculation_123286108061208576]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([v_18]) - WINDOW_AVG(SUM([v_18]))'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Total Generation to Median Income Ratio' datatype='real' name='[Calculation_123286108062253058]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[v_16]/[v_1 (censusMedianHousingExpenses)]' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='State' datatype='string' name='[v_0 (censusMedianHousingExpenses)]' role='dimension' type='nominal' />
+      <column caption='State' datatype='string' name='[v_0]' role='dimension' type='nominal' />
+      <column caption='medianMonthlyHousingCost' datatype='integer' name='[v_1 (censusMedianHousingExpenses)]' role='measure' type='quantitative' />
+      <column caption='Petroleum' datatype='real' name='[v_10]' role='measure' type='quantitative' />
+      <column caption='Gas' datatype='real' name='[v_11]' role='measure' type='quantitative' />
+      <column caption='Nuclear' datatype='integer' name='[v_12]' role='measure' type='quantitative' />
+      <column caption='Other' datatype='real' name='[v_13]' role='measure' type='quantitative' />
+      <column caption='Non-hydro RE Generation (MWh)' datatype='real' name='[v_14]' role='measure' type='quantitative' />
+      <column caption='Total RE Generation (MWh)' datatype='real' name='[v_15]' role='measure' type='quantitative' />
+      <column caption='Total Generation (MWh)' datatype='real' name='[v_16]' role='measure' type='quantitative' />
+      <column caption='Non-Hydro Renewable Percent Total Generation' datatype='real' name='[v_17]' role='measure' type='quantitative' />
+      <column caption='Renewable Percent Total Generation' datatype='real' name='[v_18]' role='measure' type='quantitative' />
+      <column caption='Abbreviation' datatype='string' name='[v_1]' role='dimension' type='nominal' />
+      <column caption='Region' datatype='string' name='[v_2]' role='dimension' type='nominal' />
+      <column caption='Biomass' datatype='real' name='[v_3]' role='measure' type='quantitative' />
+      <column caption='Geothermal' datatype='real' name='[v_4]' role='measure' type='quantitative' />
+      <column caption='Solar' datatype='real' name='[v_5]' role='measure' type='quantitative' />
+      <column caption='Wind' datatype='real' name='[v_6]' role='measure' type='quantitative' />
+      <column caption='Hydro' datatype='real' name='[v_7]' role='measure' type='quantitative' />
+      <column caption='HPS' datatype='integer' name='[v_8]' role='measure' type='quantitative' />
+      <column caption='Coal' datatype='real' name='[v_9]' role='measure' type='quantitative' />
+      <group name='[High Monthly Housing Cost States]' name-style='unqualified' user:ui-builder='lasso-group'>
+        <groupfilter function='union'>
+          <groupfilter function='member' level='[v_0]' member='&quot;Alaska&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;California&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Colorado&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Connecticut&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Delaware&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;District of Columbia&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Hawaii&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Illinois&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Maryland&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Massachusetts&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Minnesota&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Nevada&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;New Hampshire&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;New Jersey&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;New York&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Oregon&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Rhode Island&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Utah&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Vermont&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Virginia&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Washington&quot;' />
+        </groupfilter>
+      </group>
+      <extract count='-1' enabled='true' units='records'>
+        <connection class='dataengine' dbname='C:\Users\Fernnando\Documents\My Tableau Repository\Datasources\federated.1a388xv05i6q3d10xbzhs0hmqgfl_11rnztt10u1utl1ggekfo1q8v7sd.tde' schema='Extract' tablename='Extract' update-time='04/24/2017 11:49:05 PM'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <cols>
+            <map key='[v_0 (censusMedianHousingExpenses)]' value='[Extract].[v_0]' />
+            <map key='[v_0]' value='[Extract].[v_01]' />
+            <map key='[v_1 (censusMedianHousingExpenses)]' value='[Extract].[v_1]' />
+            <map key='[v_10]' value='[Extract].[v_10]' />
+            <map key='[v_11]' value='[Extract].[v_11]' />
+            <map key='[v_12]' value='[Extract].[v_12]' />
+            <map key='[v_13]' value='[Extract].[v_13]' />
+            <map key='[v_14]' value='[Extract].[v_14]' />
+            <map key='[v_15]' value='[Extract].[v_15]' />
+            <map key='[v_16]' value='[Extract].[v_16]' />
+            <map key='[v_17]' value='[Extract].[v_17]' />
+            <map key='[v_18]' value='[Extract].[v_18]' />
+            <map key='[v_1]' value='[Extract].[v_19]' />
+            <map key='[v_2]' value='[Extract].[v_2]' />
+            <map key='[v_3]' value='[Extract].[v_3]' />
+            <map key='[v_4]' value='[Extract].[v_4]' />
+            <map key='[v_5]' value='[Extract].[v_5]' />
+            <map key='[v_6]' value='[Extract].[v_6]' />
+            <map key='[v_7]' value='[Extract].[v_7]' />
+            <map key='[v_8]' value='[Extract].[v_8]' />
+            <map key='[v_9]' value='[Extract].[v_9]' />
+          </cols>
+          <refresh>
+            <refresh-event add-from-file-path='' increment-value='%null%' refresh-type='create' rows-inserted='51' timestamp-start='2017-04-24 23:49:05.061' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>v_0</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[v_0 (censusMedianHousingExpenses)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_0</remote-alias>
+              <ordinal>0</ordinal>
+              <family>censusMedianHousingExpenses</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>51</approx-count>
+              <scale>1</scale>
+              <width>1073741823</width>
+              <contains-null>false</contains-null>
+              <collation flag='0' name='LROOT' />
+              <statistics>
+                <statistic aggregation='Min' datatype='string'>&quot;AK&quot;</statistic>
+                <statistic aggregation='Max' datatype='string'>&quot;WY&quot;</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='string' name='DebugRemoteCollation'>&quot;root&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;heap&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4294967292</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (sort-position)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (sort-sense)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>2</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;str&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_01</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[v_0]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_01</remote-alias>
+              <ordinal>1</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>51</approx-count>
+              <scale>1</scale>
+              <width>1073741823</width>
+              <contains-null>false</contains-null>
+              <collation flag='0' name='LROOT' />
+              <statistics>
+                <statistic aggregation='Min' datatype='string'>&quot;Alabama&quot;</statistic>
+                <statistic aggregation='Max' datatype='string'>&quot;Wyoming&quot;</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='string' name='DebugRemoteCollation'>&quot;root&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;heap&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4294967292</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (sort-position)'>2</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (sort-sense)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>2</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;str&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_1</remote-name>
+              <remote-type>2</remote-type>
+              <local-name>[v_1 (censusMedianHousingExpenses)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_1</remote-alias>
+              <ordinal>2</ordinal>
+              <family>censusMedianHousingExpenses</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>50253.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>985.35294117647061</statistic>
+                <statistic aggregation='Min' datatype='integer'>572</statistic>
+                <statistic aggregation='Max' datatype='integer'>1523</statistic>
+                <statistic aggregation='Stdev' datatype='real'>249.75898971043358</statistic>
+                <statistic aggregation='StdevP' datatype='real'>247.29824999812232</statistic>
+                <statistic aggregation='Var' datatype='real'>62379.552941176473</statistic>
+                <statistic aggregation='VarP' datatype='real'>61156.424452133797</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>52635919.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>2</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint16&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_10</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[v_10]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_10</remote-alias>
+              <ordinal>3</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>51</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>38826627.747917175</statistic>
+                <statistic aggregation='Avg' datatype='real'>761306.42642974854</statistic>
+                <statistic aggregation='Min' datatype='real'>123.609001159668</statistic>
+                <statistic aggregation='Max' datatype='real'>8962843.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>1716192.131005896</statistic>
+                <statistic aggregation='StdevP' datatype='real'>1699283.4217913905</statistic>
+                <statistic aggregation='Var' datatype='real'>2945315430526.5586</statistic>
+                <statistic aggregation='VarP' datatype='real'>2887564147575.0571</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>176824732747412.87</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_11</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[v_11]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_11</remote-alias>
+              <ordinal>4</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>51</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>931075864.09289551</statistic>
+                <statistic aggregation='Avg' datatype='real'>18256389.49201756</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>191652528.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>34443035.45330207</statistic>
+                <statistic aggregation='StdevP' datatype='real'>34103686.926745534</statistic>
+                <statistic aggregation='Var' datatype='real'>1186322691237423.5</statistic>
+                <statistic aggregation='VarP' datatype='real'>1163061461997474.0</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>76314218183367872.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_12</remote-name>
+              <remote-type>3</remote-type>
+              <local-name>[v_12]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_12</remote-alias>
+              <ordinal>5</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>32</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>796751458.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>15622577.607843136</statistic>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>94050482</statistic>
+                <statistic aggregation='Stdev' datatype='real'>20487102.452582892</statistic>
+                <statistic aggregation='StdevP' datatype='real'>20285254.156136349</statistic>
+                <statistic aggregation='Var' datatype='real'>419721366902627.94</statistic>
+                <statistic aggregation='VarP' datatype='real'>411491536179047.0</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>33433379831898568.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint32&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_13</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[v_13]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_13</remote-alias>
+              <ordinal>6</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>42</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>11077944.178478241</statistic>
+                <statistic aggregation='Avg' datatype='real'>217214.59173486746</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>2576794.75</statistic>
+                <statistic aggregation='Stdev' datatype='real'>421014.96236429893</statistic>
+                <statistic aggregation='StdevP' datatype='real'>416866.93054142757</statistic>
+                <statistic aggregation='Var' datatype='real'>177253598534.61203</statistic>
+                <statistic aggregation='VarP' datatype='real'>173778037779.0314</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>11268971048720.404</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_14</remote-name>
+              <remote-type>4</remote-type>
+              <local-name>[v_14]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_14</remote-alias>
+              <ordinal>7</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>51</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>141116195.12451172</statistic>
+                <statistic aggregation='Avg' datatype='real'>2766984.2181276809</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>25461866.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>4491059.6313635185</statistic>
+                <statistic aggregation='StdevP' datatype='real'>4446811.6593563166</statistic>
+                <statistic aggregation='Var' datatype='real'>20169616612463.02</statistic>
+                <statistic aggregation='VarP' datatype='real'>19774133933787.273</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>1398947115454901.2</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;float&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_15</remote-name>
+              <remote-type>4</remote-type>
+              <local-name>[v_15]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_15</remote-alias>
+              <ordinal>8</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>51</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>413247133.421875</statistic>
+                <statistic aggregation='Avg' datatype='real'>8102884.9690563725</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>78908800.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>14046203.177869026</statistic>
+                <statistic aggregation='StdevP' datatype='real'>13907813.56471817</statistic>
+                <statistic aggregation='Var' datatype='real'>197295823713977.94</statistic>
+                <statistic aggregation='VarP' datatype='real'>193427278150958.75</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>13213285171608640.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;float&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_16</remote-name>
+              <remote-type>4</remote-type>
+              <local-name>[v_16]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_16</remote-alias>
+              <ordinal>9</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>51</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>3951319837.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>77476859.549019605</statistic>
+                <statistic aggregation='Min' datatype='real'>35499.0</statistic>
+                <statistic aggregation='Max' datatype='real'>396477152.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>72012621.38402234</statistic>
+                <statistic aggregation='StdevP' datatype='real'>71303120.126699239</statistic>
+                <statistic aggregation='Var' datatype='real'>5185817638598552.0</statistic>
+                <statistic aggregation='VarP' datatype='real'>5084134939802502.0</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>5.6542673397443162e+17</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;float&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_17</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[v_17]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_17</remote-alias>
+              <ordinal>10</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>51</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>2.0270275946240877</statistic>
+                <statistic aggregation='Avg' datatype='real'>0.039745639110276232</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>0.231004148721695</statistic>
+                <statistic aggregation='Stdev' datatype='real'>0.041456915273919905</statistic>
+                <statistic aggregation='StdevP' datatype='real'>0.041048462797863956</statistic>
+                <statistic aggregation='Var' datatype='real'>0.0017186758240289735</statistic>
+                <statistic aggregation='VarP' datatype='real'>0.0016849762980676211</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>0.16649929844394898</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_18</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[v_18]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_18</remote-alias>
+              <ordinal>11</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>51</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>7.0921901911497116</statistic>
+                <statistic aggregation='Avg' datatype='real'>0.1390625527676414</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>0.86408871412277199</statistic>
+                <statistic aggregation='Stdev' datatype='real'>0.1973527763125737</statistic>
+                <statistic aggregation='StdevP' datatype='real'>0.19540836656552005</statistic>
+                <statistic aggregation='Var' datatype='real'>0.038948118318280746</statistic>
+                <statistic aggregation='VarP' datatype='real'>0.038184429723804654</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>2.9336639886089433</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_19</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[v_1]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_19</remote-alias>
+              <ordinal>12</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>51</approx-count>
+              <scale>1</scale>
+              <width>1073741823</width>
+              <contains-null>false</contains-null>
+              <collation flag='0' name='LROOT' />
+              <statistics>
+                <statistic aggregation='Min' datatype='string'>&quot;AK&quot;</statistic>
+                <statistic aggregation='Max' datatype='string'>&quot;WY&quot;</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='string' name='DebugRemoteCollation'>&quot;root&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;heap&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4294967292</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>2</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;str&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_2</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[v_2]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_2</remote-alias>
+              <ordinal>13</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>12</approx-count>
+              <scale>1</scale>
+              <width>1073741823</width>
+              <contains-null>false</contains-null>
+              <collation flag='0' name='LROOT' />
+              <statistics>
+                <statistic aggregation='Min' datatype='string'>&quot;Alaska&quot;</statistic>
+                <statistic aggregation='Max' datatype='string'>&quot;West&quot;</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='Median' datatype='string'>&quot;New England&quot;</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='string' name='DebugRemoteCollation'>&quot;root&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;heap&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (ordered)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4294967292</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (sort-position)'>0</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (sort-sense)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;str&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_3</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[v_3]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_3</remote-alias>
+              <ordinal>14</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>48</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>54337610.53918457</statistic>
+                <statistic aggregation='Avg' datatype='real'>1065443.3439055798</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>6062630.5</statistic>
+                <statistic aggregation='Stdev' datatype='real'>1284525.7735256937</statistic>
+                <statistic aggregation='StdevP' datatype='real'>1271870.0385466774</statistic>
+                <statistic aggregation='Var' datatype='real'>1650006462851.7815</statistic>
+                <statistic aggregation='VarP' datatype='real'>1617653394952.7271</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>140393968615296.97</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_4</remote-name>
+              <remote-type>4</remote-type>
+              <local-name>[v_4]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_4</remote-alias>
+              <ordinal>15</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>15193303.8671875</statistic>
+                <statistic aggregation='Avg' datatype='real'>297907.91896446078</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>13022836.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>1831934.2653472947</statistic>
+                <statistic aggregation='StdevP' datatype='real'>1813885.2117284029</statistic>
+                <statistic aggregation='Var' datatype='real'>3355983152553.5327</statistic>
+                <statistic aggregation='VarP' datatype='real'>3290179561326.9927</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>172325363164945.16</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;float&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_5</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[v_5]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_5</remote-alias>
+              <ordinal>16</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>807988.00526809692</statistic>
+                <statistic aggregation='Avg' datatype='real'>15842.902064080332</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>611763.375</statistic>
+                <statistic aggregation='Stdev' datatype='real'>87725.739001610753</statistic>
+                <statistic aggregation='StdevP' datatype='real'>86861.424928257897</statistic>
+                <statistic aggregation='Var' datatype='real'>7695805283.3787298</statistic>
+                <statistic aggregation='VarP' datatype='real'>7544907140.5673828</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>397591139005.35059</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_6</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[v_6]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_6</remote-alias>
+              <ordinal>17</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>36</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>70777293.093994141</statistic>
+                <statistic aggregation='Avg' datatype='real'>1387790.0606665518</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>19367238.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>3050631.0319698788</statistic>
+                <statistic aggregation='StdevP' datatype='real'>3020574.820833372</statistic>
+                <statistic aggregation='Var' datatype='real'>9306349693217.6074</statistic>
+                <statistic aggregation='VarP' datatype='real'>9123872248252.5566</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>563541508537608.87</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_7</remote-name>
+              <remote-type>4</remote-type>
+              <local-name>[v_7]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_7</remote-alias>
+              <ordinal>18</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>272130943.50878906</statistic>
+                <statistic aggregation='Avg' datatype='real'>5335900.8531135106</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>73932816.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>12057598.478746416</statistic>
+                <statistic aggregation='StdevP' datatype='real'>11938801.50793005</statistic>
+                <statistic aggregation='Var' datatype='real'>145385681074667.91</statistic>
+                <statistic aggregation='VarP' datatype='real'>142534981445752.84</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>8721347787360527.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;float&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_8</remote-name>
+              <remote-type>3</remote-type>
+              <local-name>[v_8]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_8</remote-alias>
+              <ordinal>19</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>18</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>-4144771.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>-81270.019607843133</statistic>
+                <statistic aggregation='Min' datatype='integer'>-1215619</statistic>
+                <statistic aggregation='Max' datatype='integer'>566713</statistic>
+                <statistic aggregation='Stdev' datatype='real'>302166.74187259527</statistic>
+                <statistic aggregation='StdevP' datatype='real'>299189.65703441715</statistic>
+                <statistic aggregation='Var' datatype='real'>91304739893.899612</statistic>
+                <statistic aggregation='VarP' datatype='real'>89514450876.372162</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>4902082615135.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint32&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>v_9</remote-name>
+              <remote-type>4</remote-type>
+              <local-name>[v_9]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>v_9</remote-alias>
+              <ordinal>20</ordinal>
+              <family>energyByStateClean</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>1764485509.7578125</statistic>
+                <statistic aggregation='Avg' datatype='real'>34597755.093290441</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>139106592.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>34413516.517633162</statistic>
+                <statistic aggregation='StdevP' datatype='real'>34074458.825121671</statistic>
+                <statistic aggregation='Var' datatype='real'>1184290119109410.2</statistic>
+                <statistic aggregation='VarP' datatype='real'>1161068744224912.0</statistic>
+                <statistic aggregation='Count' datatype='integer'>51</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>1.2026174348773104e+17</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;float&quot;</attribute>
+              </attributes>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.245353' group-percentage='0.0916976' measure-ordering='alphabetic' measure-percentage='0.662949' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Percent Renewable by State/Region'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='data.world connector' name='federated.1a388xv05i6q3d10xbzhs0hmqgfl' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1a388xv05i6q3d10xbzhs0hmqgfl'>
+            <column-instance column='[v_0]' derivation='None' name='[none:v_0:nk]' pivot='key' type='nominal' />
+            <column-instance column='[v_2]' derivation='None' name='[none:v_2:nk]' pivot='key' type='nominal' />
+            <column-instance column='[v_18]' derivation='Sum' name='[sum:v_18:qk]' pivot='key' type='quantitative' />
+            <column caption='State' datatype='string' name='[v_0]' role='dimension' type='nominal' />
+            <column caption='Renewable Percent Total Generation' datatype='real' name='[v_18]' role='measure' type='quantitative' />
+            <column caption='Region' datatype='string' name='[v_2]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[High Monthly Housing Cost States]'>
+            <groupfilter function='level-members' level='[v_0]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[none:v_2:nk]'>
+            <groupfilter function='level-members' level='[none:v_2:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[High Monthly Housing Cost States]</column>
+            <column>[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[none:v_2:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[sum:v_18:qk]' value='p0.00%' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-format' field='[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[sum:v_18:qk]' value='p0.00%' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='fill-above' id='refline0' value='#00000000' />
+            <format attr='fill-below' id='refline0' value='#00000000' />
+            <format attr='text-format' id='refline0' value='' />
+            <format attr='text-format' id='refline1' value='p0.00%' />
+            <format attr='fill-above' id='refline1' value='#00000000' />
+            <format attr='fill-below' id='refline1' value='#00000000' />
+            <format attr='background-color' id='refline1' value='#ffffff' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[sum:v_18:qk]' />
+            </encodings>
+            <reference-line axis-column='[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[sum:v_18:qk]' enable-instant-analytics='true' formula='average' id='refline1' label-type='value' probability='95' scope='per-pane' value-column='[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[sum:v_18:qk]' z-order='1' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.1a388xv05i6q3d10xbzhs0hmqgfl].[none:v_2:nk] / [federated.1a388xv05i6q3d10xbzhs0hmqgfl].[none:v_0:nk])</rows>
+        <cols>[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[sum:v_18:qk]</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='Percent Renewable by State/Region'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[High Monthly Housing Cost States]' type='filter' />
+            <card param='[federated.1a388xv05i6q3d10xbzhs0hmqgfl].[none:v_2:nk]' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Percent Renewable by State/Region' width='192'>
+      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
+      SUVORK5CYII=
+    </thumbnail>
+  </thumbnails>
+</workbook>
