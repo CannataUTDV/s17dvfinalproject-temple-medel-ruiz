@@ -11,7 +11,21 @@ dashboardPage(
     )
   ),
   dashboardBody(    
-    tabItems(
+    tabItems(tabItem(tabName = "scatter",
+              tabsetPanel(
+                tabPanel("Data",  
+                         radioButtons("rb3", "Get data from:",
+                                      c("SQL" = "SQL",
+                                        "CSV" = "CSV"), inline=T),
+                         uiOutput("scatterStates"), # See http://shiny.rstudio.com/gallery/dynamic-ui.html,
+                         actionButton(inputId = "click3",  label = "To get data, click here"),
+                         hr(), # Add space after button.
+                         DT::dataTableOutput("scatterData1")
+                ),
+                tabPanel("Political Change over Turbines built: 2008 - 2014", plotlyOutput("scatterPlot1", height=1000),plotlyOutput("scatterPlot2", height=2000))
+                
+              ),
+      
       # Begin Barchart tab content.
       tabItem(tabName = "barchart",
         tabsetPanel(
