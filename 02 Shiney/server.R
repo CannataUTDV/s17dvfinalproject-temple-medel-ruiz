@@ -22,6 +22,8 @@ online0 = TRUE
 ############################### Start shinyServer Function ####################
 
 shinyServer(function(input, output) {   
+  KPI_Low = reactive({input$KPI1})     
+  KPI_Medium = reactive({input$KPI2})
   # Begin Box Plot Alv
   dfbox <- eventReactive(input$click5,{
     print("Getting from data.world")
@@ -107,7 +109,75 @@ shinyServer(function(input, output) {
     } 
   })
   # End Scatter Plots Tab ___________________________________________________________
+  # crosstab
+  dfct1 <- eventReactive(input$click1, {
+      
+      query(
+        data.world(propsfile = "www/.data.world"),
+        dataset="jacobbtemple/finalprojectdata", type="sql",
+        query="select e.`County Name` as County, r.State, r.WindRatio, r.NucRatio, r.BioRatio, r.SolRatio, r.GeoRatio, r.HydroRatio, s.`Renewable Percent Total Generation`,
+      
+        case
+        when CleanedElection.`% Trump` < .95 and CleanedElection.`% Trump` >= .90 then '.90'
+        when CleanedElection.`% Trump` < .90 and CleanedElection.`% Trump` >= .85 then '.85'
+        when CleanedElection.`% Trump` < .85 and CleanedElection.`% Trump` >= .80 then '.80'
+        when CleanedElection.`% Trump` < .80 and CleanedElection.`% Trump` >= .75 then '.75'
+        when CleanedElection.`% Trump` < .75 and CleanedElection.`% Trump` >= .70 then '.70'
+        when CleanedElection.`% Trump` < .70 and CleanedElection.`% Trump` >= .65 then '.65'
+        when CleanedElection.`% Trump` < .65 and CleanedElection.`% Trump` >= .60 then '.60'
+        when CleanedElection.`% Trump` < .60 and CleanedElection.`% Trump` >= .55 then '.55'
+        when CleanedElection.`% Trump` < .55 and CleanedElection.`% Trump` >= .50 then '.50'
+        when CleanedElection.`% Trump` < .5  and CleanedElection.`% Trump` >= .45 then '.45'
+        when CleanedElection.`% Trump` < .45 and CleanedElection.`% Trump` >= .40 then '.40'
+        when CleanedElection.`% Trump` < .40 and CleanedElection.`% Trump` >= .35 then '.35'
+        when CleanedElection.`% Trump` < .35 and CleanedElection.`% Trump` >= .30 then '.30'
+        when CleanedElection.`% Trump` < .30 and CleanedElection.`% Trump` >= .25 then '.25'
+        when CleanedElection.`% Trump` < .25 and CleanedElection.`% Trump` >= .20 then '.20'
+        when CleanedElection.`% Trump` < .20 and CleanedElection.`% Trump` >= .15 then '.15'
+        when CleanedElection.`% Trump` < .15 and CleanedElection.`% Trump` >= .10 then '.10'
+        when CleanedElection.`% Trump` < .10 and CleanedElection.`% Trump` >= .05 then '.05'
+        when CleanedElection.`% Trump` < .05 then '.00'
+        end as TrumpPercentage,
+        
+        case when CleanedElection.`% Trump` >= 50 then 'Trump'
+        when CleanedElection.`% Trump` < 50 then 'Clinton' 
+        end as winner,
+        case
+        When r.WindRatio > r.BioRatio and r.WindRatio >  r.SolRatio and  r.WindRatio > r.GeoRatio and  r.WindRatio > r.HydroRatio  and  r.WindRatio > r.NucRatio then 'Wind'
+        When  r.BioRatio  >  r.WindRatio  and  r.BioRatio > r.SolRatio  and  r.BioRatio > r.GeoRatio  and  r.BioRatio  >  r.HydroRatio  and  r.BioRatio  >  r.NucRatio  then 'Biomass'
+        When  r.SolRatio  >  r.WindRatio  and  r.SolRatio > r.BioRatio  and  r.SolRatio > r.GeoRatio  and  r.SolRatio  >  r.HydroRatio  and  r.SolRatio  >  r.NucRatio  then 'Solar'
+        When  r.GeoRatio  >  r.WindRatio  and  r.GeoRatio > r.SolRatio  and  r.GeoRatio > r.BioRatio  and  r.GeoRatio  >  r.HydroRatio  and  r.GeoRatio  >  r.NucRatio  then 'Geothermal'
+        When  r.HydroRatio  >  r.WindRatio  and  r.HydroRatio > r.SolRatio  and  r.HydroRatio > r.GeoRatio  and  r.HydroRatio  >  r.BioRatio  and  r.HydroRatio  >  r.NucRatio  then 'Hydro'
+        else 'Nuclear'
+        end as RelativelargestRenewable,
+        case
+        when CleanedEnergy.`Renewable Percent Total Generation` < ? then '03 Low'
+        when CleanedEnergy.`Renewable Percent Total Generation` < ? then '02 Medium'
+        else '01 High'
+        end as kpi
+        
+        from CleanedElection e
+        join CleanedEnergy s 
+        ON s.Abbreviation = e.`State Code`
+        join CleanedRatios r
+        ON r.State = s.State
+        ",
+        queryParameters = list(KPI_Low(), KPI_Medium())
+      ) # %>% View()
+    
+  })
   
+  output$data1 <- renderDataTable({DT::datatable(dfct1(), rownames = FALSE,
+                                                 extensions = list(Responsive = TRUE, FixedHeader = TRUE)
+  )
+  })
+  output$plot1 <- renderPlot({ggplot(dfct1()) + 
+      theme(axis.text.x=element_text(angle=90, size=16, vjust=0.5)) + 
+      theme(axis.text.y=element_text(size=16, hjust=0.5)) +
+      geom_tile(aes(x=RelativelargestRenewable, y=TrumpPercentage, fill=kpi), alpha=0.50)
+   
+      
+  })
   #Barchart 
   dfBar <- eventReactive(input$click1, {
     print("Getting from data.world")
