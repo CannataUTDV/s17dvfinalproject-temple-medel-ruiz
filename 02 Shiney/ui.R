@@ -34,6 +34,23 @@ dashboardPage(
                          hr(), # Add space after button.
                          DT::dataTableOutput("boxplotData1")
                 ),
+                tabItem(tabName = "crosstab",
+              tabsetPanel(
+                tabPanel("Data",  
+                         radioButtons("rb1", "Get data from:",
+                                      c("SQL" = "SQL",
+                                        "CSV" = "CSV"), inline=T),
+                         sliderInput("KPI1", "KPI_Low:", 
+                                     min = 0, max = .05,  value = .05),
+                         sliderInput("KPI2", "KPI_Medium:", 
+                                     min = .05, max = .1,  value = .1),
+                         actionButton(inputId = "click1",  label = "To get data, click here"),
+                         hr(), # Add space after button.
+                         DT::dataTableOutput("data1")
+                ),
+                tabPanel("Crosstab", plotOutput("plot1", height=1000))
+              )
+      ),
                 tabPanel("Simple Box Plot", 
                          sliderInput("boxSalesRange1", "Sales Range:", # See https://shiny.rstudio.com/articles/sliders.html
                                      min = min(globals$Sales), max = max(globals$Sales), 
