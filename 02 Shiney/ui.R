@@ -34,7 +34,22 @@ dashboardPage(
                          hr(), # Add space after button.
                          DT::dataTableOutput("boxplotData1")
                 ),
-                tabItem(tabName = "crosstab",
+               
+                tabPanel("Simple Box Plot", 
+                         sliderInput("boxSalesRange1", "Sales Range:", # See https://shiny.rstudio.com/articles/sliders.html
+                                     min = min(globals$Sales), max = max(globals$Sales), 
+                                     value = c(min(globals$Sales), max(globals$Sales))),
+                         sliderInput("range5a", "Loop through Quarters:", 
+                                     min(globals$Order_Date), 
+                                     max(globals$Order_Date) + .75, 
+                                     max(globals$Order_Date), 
+                                     step = 0.25,
+                                     animate=animationOptions(interval=2000, loop=T)),
+                         plotlyOutput("boxplotPlot1", height=500))
+              )
+      ),
+      # End Box Plots tab content.
+       tabItem(tabName = "crosstab",
               tabsetPanel(
                 tabPanel("Data",  
                          radioButtons("rb1", "Get data from:",
@@ -51,20 +66,6 @@ dashboardPage(
                 tabPanel("Crosstab", plotOutput("plot1", height=1000))
               )
       ),
-                tabPanel("Simple Box Plot", 
-                         sliderInput("boxSalesRange1", "Sales Range:", # See https://shiny.rstudio.com/articles/sliders.html
-                                     min = min(globals$Sales), max = max(globals$Sales), 
-                                     value = c(min(globals$Sales), max(globals$Sales))),
-                         sliderInput("range5a", "Loop through Quarters:", 
-                                     min(globals$Order_Date), 
-                                     max(globals$Order_Date) + .75, 
-                                     max(globals$Order_Date), 
-                                     step = 0.25,
-                                     animate=animationOptions(interval=2000, loop=T)),
-                         plotlyOutput("boxplotPlot1", height=500))
-              )
-      ),
-      # End Box Plots tab content.
       # Begin Histogram tab content.
       tabItem(tabName = "histogram",
               tabsetPanel(
