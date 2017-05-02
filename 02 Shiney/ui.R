@@ -77,8 +77,20 @@ dashboardPage(
                 tabPanel("Political Change over Turbines built: 2008 - 2014", plotlyOutput("scatterPlot1", height=400),plotlyOutput("scatterPlot2", height=400),plotlyOutput("scatterPlot3", height=400))
                 
               )
-      )
+      ),
       # End Scatter Plots tab content.
+      
+      tabItem(tabName = "barchart",
+              tabsetPanel(
+                tabPanel("Data",
+                         uiOutput("1"), # See http://shiny.rstudio.com/gallery/dynamic-ui.html
+                         actionButton(inputId = "click1",  label = "To get data, click here"),
+                         hr(), # Add space after button.
+                         DT::dataTableOutput("Bardata")
+                ),
+                tabPanel("Barchart","Black = Value, Red = Mean, Blue = Calculated Difference from Average", plotOutput("Barplot", height=4000))
+              )
+      )
       # Begin Crosstab tab content.
       
     )

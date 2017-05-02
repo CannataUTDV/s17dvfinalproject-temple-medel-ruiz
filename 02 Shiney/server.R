@@ -108,6 +108,41 @@ shinyServer(function(input, output) {
   })
   # End Scatter Plots Tab ___________________________________________________________
   
+  #Barchart 
+  dfBar <- eventReactive(input$click1, {
+    print("Getting from data.world")
+    tdf = query(
+      data.world(propsfile = "www/.data.world"),
+      dataset="pavilionall/s-17-dv-project-6", type="sql",
+      query="select `energyByStateClean.csv/energyByStateClean`.Region as Region,`censusMedianHousingExpenses.csv/censusMedianHousingExpenses`.State as State, sum(`energyByStateClean.csv/energyByStateClean`.`Total RE Generation (MWh)` / `censusMedianHousingExpenses.csv/censusMedianHousingExpenses`.medianMonthlyHousingCost) as `Total RE Generation per Housing Expense Dollar`
+      from `energyByStateClean.csv/energyByStateClean` e left join `censusMedianHousingExpenses.csv/censusMedianHousingExpenses` h on e.Abbreviation = h.State where `censusMedianHousingExpenses.csv/censusMedianHousingExpenses`.medianMonthlyHousingCost >=750 group by Region, e.State order by Region, `censusMedianHousingExpenses.csv/censusMedianHousingExpenses`.State
+      
+      "
+    ) 
+    
+    
+    tdf2 = tdf %>% group_by(Region) %>% summarize(avgREperDollar = mean(`Total RE Generation per Housing Expense Dollar`))
+    dplyr::inner_join(tdf, tdf2, by = "Region")
+    
+  })
+  output$Bardata <- renderDataTable({DT::datatable(dfBar(), rownames = FALSE,
+                                                   extensions = list(Responsive = TRUE, FixedHeader = TRUE)
+  )
+  })
+  output$Barplot <- renderPlot({ggplot(dfBar(), aes(x=State, y=`Total RE Generation per Housing Expense Dollar`)) +
+      scale_y_continuous(labels = scales::comma) + # no scientific notation
+      theme(axis.text.x=element_text(angle=0, size=12, vjust=0.5)) + 
+      theme(axis.text.y=element_text(size=8, hjust=0.5)) +
+      geom_bar(stat = "identity") + 
+      facet_wrap(~Region, ncol=1) + 
+      coord_flip() +
+      geom_text(mapping=aes(x=State, y=`Total RE Generation per Housing Expense Dollar`, label=`Total RE Generation per Housing Expense Dollar`),colour="black", hjust=-.5) +
+      geom_text(mapping=aes(x=State, y=`Total RE Generation per Housing Expense Dollar`, label=`Total RE Generation per Housing Expense Dollar` - avgREperDollar),colour="blue", hjust=-2) +
+      # Add reference line with a label.
+      geom_hline(aes(yintercept = avgREperDollar), color="red") +
+      geom_text(aes( -1, avgREperDollar, label = avgREperDollar, vjust = -.5, hjust = -.25), color="red")
+  })
+  
   # End Barchart Tab ___________________________________________________________
   
   })
