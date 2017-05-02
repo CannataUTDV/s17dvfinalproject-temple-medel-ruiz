@@ -62,7 +62,7 @@ Steps:<br>
 
 #**Visualizaiton #2**
 ##Tempest Tantrum: The Limited Political Influence of Windturbine Construction in Rural America:
-
+Despite the central role of fossil fuels in the recent 2016 election, when joining the main dataset with a dataset describing the number of wind turbines constructed in each US county between 2008 and 2014, one finds that the majority of counties with a wind turbine increase in the Obama era actually lost Democratic voters at a higher rate than the national average.
 <center>![Visualizaiton #2](../03 Visualizations/PoliticalGain.png)</center>
 Shiny
 <center>![Visualizaiton #2](../03 Visualizations/PoliticalGainShiny.png)</center>
