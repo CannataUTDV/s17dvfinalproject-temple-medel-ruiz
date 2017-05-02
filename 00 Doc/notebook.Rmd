@@ -29,51 +29,61 @@ sessionInfo()
 ```
 
 #**ETL**
-Put ETL here with step by step instruction 
+Put ETL here with step by step instruction
+```{r, code = readLines("../01 Data/ETL.R"), eval=FALSE}
+```
 
 #**Vizualization #1** 
+ALVARO MAIN:
 <br> </br>
 <center>![Vizualization #1](../03 Visualizations/crosstabByOwnership.png)</center>
 <br> </br> 
 
 #**Visualizaiton #2**
-
+JACOB MAIN:
 <center>![Visualizaiton #2](../03 Visualizations/ElectionResultsByRenewableEnergy.png)</center>
 Shiny
 <center>![Visualizaiton #2](../03 Visualizations/ShinyElectionResults.png)</center>
 
 
 #**Visualizaiton #3** 
+FERNANDO MAIN:
 <br></br>
 <center>![Visualizaiton #3](../03 Visualizations/ruizPercentRE.png)</center>
 <br></br>
 
 #**Visualizaiton #4** 
+ALV viz 2:
 <br></br>
 <center>![Visualizaiton #4](../03 Visualizations/ruizPercentRE.png)</center>
 <br></br>
 
 #**Visualizaiton #5** 
+ALV viz 3:
 <br></br>
 <center>![Visualizaiton #5](../03 Visualizations/ruizPercentRE.png)</center>
 <br></br>
 
 #**Visualizaiton #6** 
+Jacob viz 2:
 <br></br>
 <center>![Visualizaiton #6](../03 Visualizations/ruizPercentRE.png)</center>
 <br></br>
 
 #**Visualizaiton #7** 
+Jacob viz 3:
 <br></br>
 <center>![Visualizaiton #7](../03 Visualizations/ruizPercentRE.png)</center>
 <br></br>
 
 #**Visualizaiton #8** 
+Fernando viz 2:
 <br></br>
 <center>![Visualizaiton #8](../03 Visualizations/ruizPercentRE.png)</center>
 <br></br>
 
 #**Visualizaiton #9** 
+Fernando viz 3:
 <br></br>
 <center>![Visualizaiton #9](../03 Visualizations/ruizPercentRE.png)</center>
 <br></br>
