@@ -38,16 +38,27 @@ The following is our ETL which we used to extract and clean our raw data.
 ```{r, code = readLines("../01 Data/ETL.R"), eval=FALSE}
 ```
 
-#**TEMP TEAM NOTE**
-The first three visualizations will be our 'showcase' and i guess here we can talk about our choise of data 
 
 #**Vizualization #1** 
 ## Effects of Summer Peak Power and Type of Utility Plant 
+For this visualization I used additional data sets from the department of energy (and for the same year) which covered information about electrical utility plants, including their revenue (in thousands of dollars), customers, energy production (MWH) and other information such as their summer peak power demand (MW). Here we explore a scatterplot of three different types of utility ownership and their effects on solar power production in the state and their summer peak power demand. We see that where summer peak power demand is high we get more Investor owned utilities without much of an increase in solar power meaning that we should prefer municipal owned utilities to increase our reliance on solar power in hot and sunny places. 
+
 <br> </br>
 <center>![Vizualization #1](../03 Visualizations/scatterCooperative.png)</center>
 <center>![Vizualization #1](../03 Visualizations/scatterInvestors.png)</center>
 <center>![Vizualization #1](../03 Visualizations/scatterMunicipal.png)</center>
 <br> </br> 
+
+Steps:<br>
+1. Uncheck Aggregate Measures <br>
+2. Drag Peak_Demand_Summer to rows <br> 
+3. Filter out Peak_Demand_Summer null values<br> 
+4. Drag Solar to columns <br>
+5. Drag Region to color <br>
+6. Drag State to label <br>
+7. Click on the Analytics tab and double click on trend line (linear)<br>
+8. Lastly drag ownership to Pages. <br>
+
 
 #**Visualizaiton #2**
 ##JACOB MAIN:
@@ -59,43 +70,67 @@ Shiny
 #**Visualizaiton #3** 
 ##FERNANDO MAIN:
 <br></br>
-<center>![Visualizaiton #3](../03 Visualizations/ruizPercentRE.png)</center>
+<center>![Visualizaiton #3](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
 
 #**Visualizaiton #4** 
 ##ALVARO viz 2: Exploring the data
-Dashboard:
+In this visualization we begin to explore utility ownership type by region, by using a crosstab to show the average price per customer which is a calculated field (revenue/number of customers in thousands of dollars) I noticed that there was some disparities in prices so I also added an average revenue color box and sized it by the number of utilities present in that region and category. I found that the investor owned utilities offered less competition, higher revenues and higher price per customer. Also I included a map colored by the regions and labeled by the number of utilities with a Tableau Action to go from the crosstab to the general region. 
 <br></br>
 <center>![Visualizaiton #7](../03 Visualizations/RegionsAndUtilitiesMap.png)</center>
 <center>![Visualizaiton #7](../03 Visualizations/crosstabByOwnership.png)</center>
 <br></br>
 
+Crosstab <br>
+1. Start with two dimensions: Ownership and Region<br>
+2. Create calculated field PricePerCustomer = Total_Revenues/Total_Customers <br>
+3. Drag PricePerCustomer onto Label and set it to average <br>
+4. Drag Owners to size and set it as a count (to count the number of utilities) <br>
+5. Drag Total_Revenues and set it to color, change color to red <br>
+
+Map:<br>
+1. Modify the State Dimension and set its geographic role to state/province <br>
+2. Set the auto generated longitude and latitude from state as columns and rows <br>
+3. Drag State to detail (so you can hover over it) <br>
+4. Drag Region to color <br>
+5. Drag Region to label, set it to count (since each utility will add to count in a given region) <br>
+6. Add an action by going to worksheet ??? Actions, and then add a filter between the two.<br>
+
+
 #**Visualizaiton #5** 
-##ALVARO viz 3: Inspiration for main
+##ALVARO viz 3: Boxplot Exploration  
+Here we continue to explore the data by creating a box plot that looks at each region and the percent of renewable energy of each state. I thought it would be interesting to explore the relationship between percent of renewable energy and the peak summer power consumption so I sized each dot by their relative summer peak value (I could have done the same with winter). We see that there are states with very high renewable energy percentage and small peak summer power values which is probably due to the high percentage of wind and other renewables as oppose to solar energy. Also we can see that the regions are somewhat grouped by their similar climate since they share very similar peak summer power values.
 <br></br>
 <center>![Vizualization #5](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
 
+Steps: <br>
+1. Uncheck aggregate measures <br>
+2. Drag renewable percent to Rows, and select bar chart under the show me <br>
+3. Drag abbreviation to label (to label each state) <br>
+4. Drag Peak_Demand_Summer to size  <br>
+
+
 #**Visualizaiton #6** 
 Jacob viz 2:
 <br></br>
-<center>![Visualizaiton #6](../03 Visualizations/ruizPercentRE.png)</center>
+<center>![Visualizaiton #6](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
 
 #**Visualizaiton #7** 
 Jacob viz 3:
 <br></br>
-<center>![Visualizaiton #7](../03 Visualizations/ruizPercentRE.png)</center>
+<center>![Visualizaiton #7](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
 
 #**Visualizaiton #8** 
 Fernando viz 2:
 <br></br>
-<center>![Visualizaiton #8](../03 Visualizations/ruizPercentRE.png)</center>
+<center>![Visualizaiton #8](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
 
 #**Visualizaiton #9** 
 Fernando viz 3:
 <br></br>
-<center>![Visualizaiton #9](../03 Visualizations/ruizPercentRE.png)</center>
+<center>![Visualizaiton #9](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
