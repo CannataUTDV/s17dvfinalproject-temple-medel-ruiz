@@ -145,4 +145,31 @@ shinyServer(function(input, output) {
   
   # End Barchart Tab ___________________________________________________________
   
+  #Histogram
+  dfHist <- eventReactive(input$click4, {
+    print("Getting from data.world")
+    tdf = query(
+      data.world(propsfile = "www/.data.world"),
+      dataset="pavilionall/s-17-dv-project-6", type="sql",
+      query="select h.State as State, (`energyByStateClean.csv/energyByStateClean`.`Total Generation (MWh)` / `censusMedianHousingExpenses.csv/censusMedianHousingExpenses`.medianMonthlyHousingCost) as `Total Generation per Housing Expense Dollar`, `censusMedianHousingExpenses.csv/censusMedianHousingExpenses`.medianMonthlyHousingCost as `Median Monthly Housing Cost`
+from `energyByStateClean.csv/energyByStateClean` e left join `censusMedianHousingExpenses.csv/censusMedianHousingExpenses` h on e.Abbreviation = h.State order by h.State
+  "
+    ) 
+    
+    
+    
+    
+  })
+  output$Histdata <- renderDataTable({DT::datatable(dfHist(), rownames = FALSE,
+                                                   extensions = list(Responsive = TRUE, FixedHeader = TRUE)
+  )
+  })
+  output$Histplot <- renderPlotly({p <- ggplot(dfHist()) +
+    geom_histogram(aes(x=`Total Generation per Housing Expense Dollar`)) +
+    theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5))
+  ggplotly(p)
+  })
+  
+  #End Histogram
+  
   })

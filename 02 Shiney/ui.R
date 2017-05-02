@@ -52,14 +52,11 @@ dashboardPage(
       tabItem(tabName = "histogram",
               tabsetPanel(
                 tabPanel("Data",  
-                         radioButtons("rb4", "Get data from:",
-                                      c("SQL" = "SQL",
-                                        "CSV" = "CSV"), inline=T),
                          actionButton(inputId = "click4",  label = "To get data, click here"),
                          hr(), # Add space after button.
-                         DT::dataTableOutput("histogramData1")
+                         DT::dataTableOutput("Histdata")
                 ),
-                tabPanel("Simple Histogram", plotlyOutput("histogramPlot1", height=1000))
+                tabPanel("Histogram", plotlyOutput("Histplot", height=1000))
               )
       ),
       # End Histograms tab content.
