@@ -1,4 +1,3 @@
-# server.R
 require(ggplot2)
 require(dplyr)
 require(shiny)
@@ -6,48 +5,69 @@ require(shinydashboard)
 require(data.world)
 require(readr)
 require(DT)
+require(leaflet)
+require(plotly)
+require(lubridate)
 
-# The following query is for the select list in the Barcharts tab.
+online0 = TRUE
 
+# Server.R structure:
+#   Queries that don’t need to be redone
+#   shinyServer
+#   widgets
+#   tab specific queries and plotting
 
-shinyServer(function(input, output) { 
+  
+
+############################### Start shinyServer Function ####################
+
+shinyServer(function(input, output) {   
   
   
-# Begin Barchart Tab ------------------------------------------------------------------
-  df2 <- eventReactive(input$click2, {
+  
+  # Begin Scatter Plots Tab ------------------------------------------------------------------
+  dfsc1 <- eventReactive(input$click3, {
+   
       print("Getting from data.world")
       tdf = query(
-        data.world(propsfile = "www/.data.world"),
-        dataset="pavilionall/s-17-dv-project-4", type="sql",
-        query="select state , county, poptotal
-                from ETLOutMidwest
-                group by state, county"
+        data.world(token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcm9kLXVzZXItY2xpZW50OmphY29iYnRlbXBsZSIsImlzcyI6ImFnZW50OmphY29iYnRlbXBsZTo6NTlkNDhjOTktNGVhMy00OTNlLTk0OGQtZWNjMDlhODhmMGY1IiwiaWF0IjoxNDkyNDgyMjA1LCJyb2xlIjpbInVzZXJfYXBpX3dyaXRlIiwidXNlcl9hcGlfcmVhZCJdLCJnZW5lcmFsLXB1cnBvc2UiOnRydWV9.ZbvoSVOGE5N4fj-ANbG7cNoLUKydk1_01IuCIUJtyj_t5nuGPqUYGq_gM7jPnOG6MWV0lpeG2-lSCWgOKHjOVw"),
+        dataset="jacobbtemple/finalprojectdata", type="sql",
+        query="select `County Name` as County, increase, Density,ElectionWind.`Clinton % B(W) Obama`/ ElectionWind.`% Obama` as Gain, `Non-Hydro Renewable Percent Total Generation`,
+        case
+        when `% Obama` > `% Romney` and `% Clinton` > `% Trump` then 'Dem hold'
+        when `% Obama` > `% Romney` and `% Clinton` < `% Trump` then 'Rep gain'
+        when `% Obama` < `% Romney` and `% Clinton` > `% Trump` then 'Dem gain'
+        when `% Obama` < `% Romney` and `% Clinton` < `% Trump` then 'Rep hold'
+        end as PartyChange
+        from ElectionWind where increase > 1 and increase <1000"
       ) # %>% View()
-    
-    # The following two lines mimic what can be done with Analytic SQL. Analytic SQL does not currently work in data.world.
-    tdf2 = tdf %>% group_by(state) %>% summarize(avgpoptotal = mean(poptotal))
-    dplyr::inner_join(tdf, tdf2, by = "state")
-    # Analytic SQL would look something like this:
-      # select Category, Region, sum_sales, avg(sum_sales) 
-      # OVER (PARTITION BY Category ) as window_avg_sales
-      # from (select Category, Region, sum(Sales) sum_sales
-      #       from SuperStoreOrders
-      #      group by Category, Region)
-  })
-  output$data2 <- renderDataTable({DT::datatable(df2(), rownames = FALSE,
-                        extensions = list(Responsive = TRUE, FixedHeader = TRUE)
+    }
+    )
+  output$scatterData1 <- renderDataTable({DT::datatable(dfsc1(), rownames = FALSE,
+                                                        extensions = list(Responsive = TRUE, 
+                                                                          FixedHeader = TRUE)
   )
   })
-  output$plot2 <- renderPlot({ggplot(df2(), aes(x=county, y=poptotal)) +
-      scale_y_continuous(labels = scales::comma) + # no scientific notation
-      theme(axis.text.x=element_text(angle=0, size=1, vjust=0.5)) + 
-      theme(axis.text.y=element_text(size=1, hjust=0.5)) +
-      geom_bar(stat = "identity") + 
-      facet_wrap(~state, ncol=1) +
-      coord_flip() + 
-      geom_hline(aes(yintercept = round(avgpoptotal)), color="red") 
-      #geom_text(aes( -1, window_avg_sales, label = window_avg_sales, vjust = -.5, hjust = -.25), color="red")
+  output$scatterPlot1 <- renderPlotly({p <- ggplot(dfsc1()) + 
+    theme(axis.text.x=element_text(angle=90, size=16, vjust=0.5)) + 
+    theme(axis.text.y=element_text(size=16, hjust=0.5)) +
+    geom_point(aes(x=increase, y=Gain, colour=PartyChange), size=2)  
+  ggplotly(p)
   })
+  output$scatterPlot2 <- renderPlotly({p <- ggplot(dfsc1()) + 
+    theme(axis.text.x=element_text(angle=90, size=16, vjust=0.5)) + 
+    theme(axis.text.y=element_text(size=16, hjust=0.5)) +
+    geom_point(aes(x=increase, y=Density, colour=PartyChange), size=2) 
+  ggplotly(p)
+  })
+  output$scatterPlot3 <- renderPlotly({p <- ggplot(dfsc1()) + 
+    theme(axis.text.x=element_text(angle=90, size=16, vjust=0.5)) + 
+    theme(axis.text.y=element_text(size=16, hjust=0.5)) +
+    geom_point(aes(x=increase, y=`Non-Hydro Renewable Percent Total Generation`, colour=PartyChange), size=2)
+  ggplotly(p)
+  })
+  # End Scatter Plots Tab ___________________________________________________________
+  
   # End Barchart Tab ___________________________________________________________
   
-})
+  })
