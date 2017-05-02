@@ -113,9 +113,10 @@ Steps: <br>
 
 
 #**Visualizaiton #6** 
-Jacob viz 2:
+## Election Results by Relative Strength of Renewable Energy Types:
+Here we see that when counties are grouped by which which renewable resources is the most prominent compared to the its national average and color based on that State's renewable enrgy percentage one finds that several of the counties from the high percentage renewable states actually voted for Donald Trump. but one also sees that states where wind energy is highly represented did so at a much lower rate. 
 <br></br>
-<center>![Visualizaiton #6](../03 Visualizations/RenewablesBoxPlot.png)</center>
+<center>![Visualizaiton #6](../03 Visualizations/RelativeRenewables.png)</center>
 <br></br>
 
 #**Visualizaiton #7** 
