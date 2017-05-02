@@ -22,8 +22,21 @@ online0 = TRUE
 ############################### Start shinyServer Function ####################
 
 shinyServer(function(input, output) {   
-  
-  
+  # Begin Box Plot Alv
+  dfbox <- eventReactive(input$click5,{
+    print("Getting from data.world")
+    tdfbox = query(
+      data.world(token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcm9kLXVzZXItY2xpZW50OmphY29iYnRlbXBsZSIsImlzcyI6ImFnZW50OmphY29iYnRlbXBsZTo6NTlkNDhjOTktNGVhMy00OTNlLTk0OGQtZWNjMDlhODhmMGY1IiwiaWF0IjoxNDkyNDgyMjA1LCJyb2xlIjpbInVzZXJfYXBpX3dyaXRlIiwidXNlcl9hcGlfcmVhZCJdLCJnZW5lcmFsLXB1cnBvc2UiOnRydWV9.ZbvoSVOGE5N4fj-ANbG7cNoLUKydk1_01IuCIUJtyj_t5nuGPqUYGq_gM7jPnOG6MWV0lpeG2-lSCWgOKHjOVw"),
+      dataset="jacobbtemple/finalprojectdata", type="sql",
+      query = "select * from energyByStateClean"
+    )
+  }
+  )
+  output$boxplotData1 <- renderDataTable({DT::datatable(dfbox(), rownames = FALSE,
+                                                        extensions = list(Responsive = TRUE, 
+                                                                          FixedHeader = TRUE)
+  )
+  })
   
   # Begin Scatter Plots Tab ------------------------------------------------------------------
   dfsc1 <- eventReactive(input$click3, {
