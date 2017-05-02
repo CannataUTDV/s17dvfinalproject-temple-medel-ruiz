@@ -61,10 +61,11 @@ Steps:<br>
 
 
 #**Visualizaiton #2**
-##JACOB MAIN:
-<center>![Visualizaiton #2](../03 Visualizations/ElectionResultsByRenewableEnergy.png)</center>
+##Tempest Tantrum: The Limited Political Influence of Windturbine Construction in Rural America:
+
+<center>![Visualizaiton #2](../03 Visualizations/PoliticalGain.png)</center>
 Shiny
-<center>![Visualizaiton #2](../03 Visualizations/ShinyElectionResults.png)</center>
+<center>![Visualizaiton #2](../03 Visualizations/PoliticalGainShiny.png)</center>
 
 
 #**Visualizaiton #3** 

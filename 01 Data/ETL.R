@@ -32,3 +32,42 @@ df <- df[-1,]
 # https://data.world/jacobbtemple/finalprojectdata
 
 write.csv(file="energyByStateClean.csv", x = df, row.names=FALSE, na = "")
+
+
+# Load Auxillary Tables
+elec <- readr::read_csv('election.csv')
+count <- readr::read_csv('county.csv')
+eng <- readr::read_csv("energy.csv")
+rat <- readr::read_csv("RenewableRatios.csv")
+
+
+# remove special characters and spaces and set to same case for joining rows.
+count[2] <- data.frame(lapply(count[2],tolower))
+count[2] <- data.frame(lapply(count[2],gsub,pattern="[^ -~]",replacement = ""))
+count[2] <- data.frame(lapply(count[2],gsub,pattern = " ",replacement =""))
+elec[2] <- data.frame(lapply(elec[2], gsub, pattern="[^ -~]",replacement= ""))  
+elec[2] <- data.frame(lapply(elec[2], gsub, pattern =" County" , replacement = "")) 
+elec[2] <- data.frame(lapply(elec[2], gsub, pattern =" ", replacement ="" ))
+elec[2] <- data.frame(lapply(elec[2], tolower))
+eng[2] <- data.frame(lapply(eng[2], gsub, pattern = " [^ -~]", replacement = ""))
+eng[2] <- data.frame(lapply(eng[2],toupper))
+eng[2] <- data.frame(lapply(eng[2],gsub, pattern = " ", replacement = ""))
+eng[1] <- data.frame(lapply(eng[1], gsub, pattern = " [^ -~]", replacement = ""))
+eng[1] <- data.frame(lapply(eng[1],toupper))
+eng[1] <- data.frame(lapply(eng[1],gsub, pattern = " ", replacement = ""))
+rat[1] <- data.frame(lapply(rat[1], gsub, pattern = " [^ -~]", replacement = ""))
+rat[1] <- data.frame(lapply(rat[1],toupper))
+rat[1] <- data.frame(lapply(rat[1],gsub, pattern = " ", replacement = ""))
+ 
+# Create Cleaned Tables
+write.csv(count,"CleanedCounty.csv")
+write.csv(elec,"CleanedElection.csv")
+write.csv(rat,"CleanedRatios.csv")
+write.csv(eng,"CleanedEnergy.csv")
+
+# Create unified data frame
+tab <- dplyr::left_join(x = elec, y = count, by = c("County Name" = "county","State Code" = "state" ))
+tab <- dplyr::left_join(x =tab, y = eng, by = c("State Code" = "Abbreviation" ))
+ 
+# Write Unified DataFrame
+write.csv(tab,"ElectionWind.csv")
