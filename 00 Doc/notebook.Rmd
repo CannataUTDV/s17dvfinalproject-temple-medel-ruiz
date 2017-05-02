@@ -12,11 +12,15 @@ output:
 #**Introduction** 
 <center>![Alvaro](energy_pic.png)</center>
 <br></br>
-We used data from the department of energy that tracks energy production by state in 2009, from renewable energy to oil and gas. We thought this data was intresting because by joining to other data sets by state such as the census data we can take an in-depth look at a given state or an overall view of the energy production in the country or trends in certain regions. For our final project we might take what we learned from this project and include another data set which tracks oil production over the last 100 years in the US (by state) to draw some conclusions on the state of energy production in the US and its future development. 
+In this R notebook we visualize data from the department of energy that tracks energy production by state in 2009, from renewable energy to oil and gas. We thought this data was intresting because by joining to other data sets (by state) such as the census data we can take an in-depth look at a given state or an overall view of the energy production in the country or trends in certain regions. In the following sections we will show the steps taken to go from raw data from data.world to Tableau and Shiney visualizations.  
 <br></br>
 
 #**Data**
-WORK: write about why we chose this data set and the other datasets we joined on.
+<br></br>
+Our main data set: energyByStateClean.csv features state by state information of energy related statistics such as alternative energy production (solar, wind, hydropower), fossil fuel and natural gass energy production, and nuclear energy production in MWH (MegaWatt-Hour) which is a unit of energy with 1MWH being roughly enough energy to power 300 homes for an hour. In our previous project we attempted to use information from the census data to explore the effects of demographics and employment on energy production but found it difficult to establish conclusive relationships which is why in the project we chose to focus on the diffrent facets of the energy production buisness. 
+All of our data was taken directly from data.world, queried and then uploaded to our private data set to be cleaned, further queried and joined to other data sets. 
+<br></br>
+
 
 #**R Configuration**
 ```{r sessionInfo}
@@ -29,39 +33,44 @@ sessionInfo()
 ```
 
 #**ETL**
-Put ETL here with step by step instruction
+The following is our ETL which we used to extract and clean our raw data.
 ```{r, code = readLines("../01 Data/ETL.R"), eval=FALSE}
 ```
 
+#**TEMP TEAM NOTE**
+The first three visualizations will be our 'showcase' and i guess here we can talk about our choise of data 
+
 #**Vizualization #1** 
-ALVARO MAIN:
+## Effects of Summer Peak Power and Type of Utility Plant 
 <br> </br>
-<center>![Vizualization #1](../03 Visualizations/crosstabByOwnership.png)</center>
+<center>![Vizualization #1](../03 Visualizations/scatterCooperative.png)</center>
+<center>![Vizualization #1](../03 Visualizations/scatterInvestors.png)</center>
+<center>![Vizualization #1](../03 Visualizations/scatterMunicipal.png)</center>
 <br> </br> 
 
 #**Visualizaiton #2**
-JACOB MAIN:
+##JACOB MAIN:
 <center>![Visualizaiton #2](../03 Visualizations/ElectionResultsByRenewableEnergy.png)</center>
 Shiny
 <center>![Visualizaiton #2](../03 Visualizations/ShinyElectionResults.png)</center>
 
 
 #**Visualizaiton #3** 
-FERNANDO MAIN:
+##FERNANDO MAIN:
 <br></br>
 <center>![Visualizaiton #3](../03 Visualizations/ruizPercentRE.png)</center>
 <br></br>
 
 #**Visualizaiton #4** 
-ALV viz 2:
+##ALVARO viz 2: Exploring the data
 <br></br>
-<center>![Visualizaiton #4](../03 Visualizations/ruizPercentRE.png)</center>
+<center>![Visualizaiton #4](../03 Visualizations/crosstabDashboard.png)</center>
 <br></br>
 
 #**Visualizaiton #5** 
-ALV viz 3:
+##ALVARO viz 3:
 <br></br>
-<center>![Visualizaiton #5](../03 Visualizations/ruizPercentRE.png)</center>
+<center>![Vizualization #5](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
 
 #**Visualizaiton #6** 
