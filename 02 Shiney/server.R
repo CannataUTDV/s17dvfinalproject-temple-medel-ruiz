@@ -39,21 +39,40 @@ shinyServer(function(input, output) {
   })
   
   # Begin Scatter Plots Tab ------------------------------------------------------------------
-  dfsc1 <- eventReactive(input$click3, {
+   dfsc1 <- eventReactive(input$click3, {
    
       print("Getting from data.world")
       tdf = query(
         data.world(token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcm9kLXVzZXItY2xpZW50OmphY29iYnRlbXBsZSIsImlzcyI6ImFnZW50OmphY29iYnRlbXBsZTo6NTlkNDhjOTktNGVhMy00OTNlLTk0OGQtZWNjMDlhODhmMGY1IiwiaWF0IjoxNDkyNDgyMjA1LCJyb2xlIjpbInVzZXJfYXBpX3dyaXRlIiwidXNlcl9hcGlfcmVhZCJdLCJnZW5lcmFsLXB1cnBvc2UiOnRydWV9.ZbvoSVOGE5N4fj-ANbG7cNoLUKydk1_01IuCIUJtyj_t5nuGPqUYGq_gM7jPnOG6MWV0lpeG2-lSCWgOKHjOVw"),
         dataset="jacobbtemple/finalprojectdata", type="sql",
-        query="select `County Name` as County, increase, Density,ElectionWind.`Clinton % B(W) Obama`/ ElectionWind.`% Obama` as Gain, `Non-Hydro Renewable Percent Total Generation`,
+        query="select e.`County Name` as County, c.increase, e.Density,e.`Clinton % B(W) Obama`/ e.`% Obama` as Gain, s.`Non-Hydro Renewable Percent Total Generation`,
         case
-        when `% Obama` > `% Romney` and `% Clinton` > `% Trump` then 'Dem hold'
-        when `% Obama` > `% Romney` and `% Clinton` < `% Trump` then 'Rep gain'
-        when `% Obama` < `% Romney` and `% Clinton` > `% Trump` then 'Dem gain'
-        when `% Obama` < `% Romney` and `% Clinton` < `% Trump` then 'Rep hold'
-        end as PartyChange
-        from ElectionWind where increase > 1 and increase <1000"
-      ) # %>% View()
+        when e.`% Obama` > e.`% Romney` and e.`% Clinton` > e.`% Trump` then 'Dem hold'
+        when e.`% Obama` > e.`% Romney` and e.`% Clinton` < e.`% Trump` then 'Rep gain'
+        when e.`% Obama` < e.`% Romney` and e.`% Clinton` > e.`% Trump` then 'Dem gain'
+        when e.`% Obama` < e.`% Romney` and e.`% Clinton` < e.`% Trump` then 'Rep hold'
+        end as PartyChange,
+        case
+        when e.`Clinton % B(W) Obama`/ e.`% Obama` > -.193 then 'Above Avergae'
+        else 'Below Average'
+        end as AvgGain,
+
+        case
+        when e.Density > 272.38 then 'Above Average'
+        else 'Below Average'
+        end as AvgDens,
+
+        case
+        when s.`Non-Hydro Renewable Percent Total Generation`>.04 then 'Above Average'
+        else 'Below Average'
+        end as AvgRen
+        from CleanedElection e 
+        LEFT OUTER JOIN CleanedCounty c
+        ON e.`County Name` = c.county and e.`State Code` = c.state
+        LEFT OUTER JOIN CleanedEnergy s 
+        ON s.Abbreviation = e.`State Code` 
+        where increase > 1"
+      ) 
     }
     )
   output$scatterData1 <- renderDataTable({DT::datatable(dfsc1(), rownames = FALSE,
@@ -64,19 +83,19 @@ shinyServer(function(input, output) {
   output$scatterPlot1 <- renderPlotly({p <- ggplot(dfsc1()) + 
     theme(axis.text.x=element_text(angle=90, size=16, vjust=0.5)) + 
     theme(axis.text.y=element_text(size=16, hjust=0.5)) +
-    geom_point(aes(x=increase, y=Gain, colour=PartyChange), size=2)  
+    geom_point(aes(x=increase, y=Gain, colour=PartyChange, shape = AvgGain), size=2)  
   ggplotly(p)
   })
   output$scatterPlot2 <- renderPlotly({p <- ggplot(dfsc1()) + 
     theme(axis.text.x=element_text(angle=90, size=16, vjust=0.5)) + 
     theme(axis.text.y=element_text(size=16, hjust=0.5)) +
-    geom_point(aes(x=increase, y=Density, colour=PartyChange), size=2) 
+    geom_point(aes(x=increase, y=Density, colour=PartyChange, shape = AvgDens), size=2) 
   ggplotly(p)
   })
   output$scatterPlot3 <- renderPlotly({p <- ggplot(dfsc1()) + 
     theme(axis.text.x=element_text(angle=90, size=16, vjust=0.5)) + 
     theme(axis.text.y=element_text(size=16, hjust=0.5)) +
-    geom_point(aes(x=increase, y=`Non-Hydro Renewable Percent Total Generation`, colour=PartyChange), size=2)
+    geom_point(aes(x=increase, y=`Non-Hydro Renewable Percent Total Generation`, colour=PartyChange, shape = AvgRen), size=2)
   ggplotly(p)
   })
   output$plot2 <- renderPlot({
