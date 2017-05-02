@@ -70,8 +70,14 @@ Shiny
 
 #**Visualizaiton #3** 
 ##FERNANDO MAIN:
+The Barchart visualization Plots the Total Renewable energy per Housing Expesne Dollar for every State (a table calculation), which is windowed with the State's corresponding Region.
+Some Regions include only one State, which generally means the State itself produces an extremely high amount of energy.
+Interesting Observations:
+The West region of the US has the highest Renewable Energy per Housing Expense Dollar ratio out of all the Regions with more than two States.
+California is notably Excluded from the West, which would increase the average Ratio even higher. 
+
 <br></br>
-<center>![Visualizaiton #3](../03 Visualizations/RenewablesBoxPlot.png)</center>
+<center>![Visualizaiton #3](../03 Visualizations/RenewableEnergyperHousingExpenseDollarBar.png)</center>
 <br></br>
 
 #**Visualizaiton #4** 
@@ -121,7 +127,17 @@ Here we see that when counties are grouped by which which renewable resources is
 
 
 #**Visualizaiton #8** 
-Fernando viz 2:
+
+
+The Histogram visualization uses the Total energy per Housing Expense Dollar ratio, and plots it in bins. Dot plots are used to show the average (monthly) Housing Expense per bin.
+Interesting Observations:
+Texas has the highest Total Energy per Housing Expense ratio.
+The Dot plot shows that the average monthly housing Expense for is correlated with the Total Energy per Housing Expense ratio
+
+<center>![Visualizaiton #6](../03 Visualizations/TotalEnergyperHousingExpenseDollarHist.png)</center>
+
+
+
 <br></br>
 <center>![Visualizaiton #8](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
