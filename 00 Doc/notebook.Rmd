@@ -1,5 +1,5 @@
 ---
-title: "<center><b>2009 Energy Production Data Analysis</b></center>"
+title: "<center><b>2009 Renewable Energy Production Data Analysis</b></center>"
 author: "<center><b>Alvaro Medel, Fernando Ruiz, Jacob Temple</b></center>"
 date: "<center>May 1, 2017</center>"
 output:
@@ -119,20 +119,9 @@ Here we see that when counties are grouped by which which renewable resources is
 <center>![Visualizaiton #6](../03 Visualizations/RelativeRenewables.png)</center>
 <br></br>
 
-#**Visualizaiton #7** 
-Jacob viz 3:
-<br></br>
-<center>![Visualizaiton #7](../03 Visualizations/RenewablesBoxPlot.png)</center>
-<br></br>
 
 #**Visualizaiton #8** 
 Fernando viz 2:
 <br></br>
 <center>![Visualizaiton #8](../03 Visualizations/RenewablesBoxPlot.png)</center>
-<br></br>
-
-#**Visualizaiton #9** 
-Fernando viz 3:
-<br></br>
-<center>![Visualizaiton #9](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
