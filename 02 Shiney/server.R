@@ -24,13 +24,14 @@ online0 = TRUE
 shinyServer(function(input, output) {   
   KPI_Low = reactive({input$KPI1})     
   KPI_Medium = reactive({input$KPI2})
+  
   # Begin Box Plot Alv
   dfbox <- eventReactive(input$click5,{
     print("Getting from data.world")
     tdfbox = query(
       data.world(token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcm9kLXVzZXItY2xpZW50OmphY29iYnRlbXBsZSIsImlzcyI6ImFnZW50OmphY29iYnRlbXBsZTo6NTlkNDhjOTktNGVhMy00OTNlLTk0OGQtZWNjMDlhODhmMGY1IiwiaWF0IjoxNDkyNDgyMjA1LCJyb2xlIjpbInVzZXJfYXBpX3dyaXRlIiwidXNlcl9hcGlfcmVhZCJdLCJnZW5lcmFsLXB1cnBvc2UiOnRydWV9.ZbvoSVOGE5N4fj-ANbG7cNoLUKydk1_01IuCIUJtyj_t5nuGPqUYGq_gM7jPnOG6MWV0lpeG2-lSCWgOKHjOVw"),
       dataset="jacobbtemple/finalprojectdata", type="sql",
-      query = "select * from energyByStateClean e join electricityJoined j on e.Abbreviation = j.State"
+      query = "select e.State, j.Name, e.Region, e.Solar, e.`Total RE Generation (MWh)`, j.PEAK_DEMAND_SUMMER from energyByStateClean e join electricityJoined j on e.Abbreviation = j.State"
     )
   }
   )
@@ -40,6 +41,22 @@ shinyServer(function(input, output) {
   )
   })
   
+  #error Warning: Removed 3540 rows containing non-finite values (stat_boxplot). when I try to limit 
+  #dfbp2 <- eventReactive(c(input$click5, input$boxSalesRange1), {
+  # dfbox() %>% dplyr::filter(`Total RE Generation (MWh)` >= input$boxSalesRange1[1] & `Total RE Generation (MWh)` <= input$boxSalesRange1[2]) # %>% View()
+  #})
+  
+  output$boxplotPlot1 <- renderPlotly({
+    #View(dfbp3())
+    p <- ggplot(dfbox()) + 
+      geom_boxplot(aes(x=Region, y=`Total RE Generation (MWh)`, colour=Region)) + 
+      scale_y_continuous(labels = scales::comma) +
+      #ylim(0,input$boxSalesRange1[1]) +
+      theme(axis.text.x=element_text(angle=90, size=10, vjust=0.5)) +
+      theme(axis.text.y=element_text(angle=90, size=8, vjust=0.5))
+    ggplotly(p)
+  })
+  # End Box Plot Tab -------------------------------------------------------------------------
   # Begin Scatter Plots Tab ------------------------------------------------------------------
    dfsc1 <- eventReactive(input$click3, {
    
