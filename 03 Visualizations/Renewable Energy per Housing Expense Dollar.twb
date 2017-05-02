@@ -532,6 +532,20 @@
       <column caption='Hydro' datatype='real' name='[v_7]' role='measure' type='quantitative' />
       <column caption='HPS' datatype='integer' name='[v_8]' role='measure' type='quantitative' />
       <column caption='Coal' datatype='real' name='[v_9]' role='measure' type='quantitative' />
+      <group name='[Housing Cost 750+]' name-style='unqualified' user:ui-builder='lasso-group'>
+        <groupfilter function='union'>
+          <groupfilter function='member' level='[v_0]' member='&quot;Alaska&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Arizona&quot;' />
+          <groupfilter from='&quot;California&quot;' function='range' level='[v_0]' to='&quot;Kansas&quot;' />
+          <groupfilter from='&quot;Louisiana&quot;' function='range' level='[v_0]' to='&quot;Minnesota&quot;' />
+          <groupfilter from='&quot;Missouri&quot;' function='range' level='[v_0]' to='&quot;North Carolina&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Ohio&quot;' />
+          <groupfilter from='&quot;Oregon&quot;' function='range' level='[v_0]' to='&quot;South Carolina&quot;' />
+          <groupfilter from='&quot;Tennessee&quot;' function='range' level='[v_0]' to='&quot;Washington&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Wisconsin&quot;' />
+          <groupfilter function='member' level='[v_0]' member='&quot;Wyoming&quot;' />
+        </groupfilter>
+      </group>
       <extract count='-1' enabled='true' units='records'>
         <connection class='dataengine' dbname='C:\Users\Fernnando\Documents\My Tableau Repository\Datasources\federated.19i35230qymtrh1h1rsyg0zr9jdi_1c3q7yo1qiy2cw114wwhi058tuxd.tde' schema='Extract' tablename='Extract' update-time='05/02/2017 06:26:23 AM'>
           <relation name='Extract' table='[Extract].[Extract]' type='table' />
@@ -1220,13 +1234,40 @@
           </metadata-records>
         </connection>
       </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.292743' measure-ordering='alphabetic' measure-percentage='0.707257' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.251908' group-percentage='0.06743' measure-ordering='alphabetic' measure-percentage='0.680662' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
       </semantic-values>
     </datasource>
   </datasources>
   <worksheets>
+    <worksheet name='ID Set Barchart'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='&quot;jacobbtemple/finalprojectdata&quot;' name='federated.19i35230qymtrh1h1rsyg0zr9jdi' />
+          </datasources>
+          <datasource-dependencies datasource='federated.19i35230qymtrh1h1rsyg0zr9jdi'>
+            <column-instance column='[v_0]' derivation='None' name='[none:v_0:nk]' pivot='key' type='nominal' />
+            <column-instance column='[v_1 (censusMedianHousingExpenses)]' derivation='Sum' name='[sum:v_1 (censusMedianHousingExpenses):qk]' pivot='key' type='quantitative' />
+            <column caption='State' datatype='string' name='[v_0]' role='dimension' type='nominal' />
+            <column caption='medianMonthlyHousingCost' datatype='integer' name='[v_1 (censusMedianHousingExpenses)]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</rows>
+        <cols>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</cols>
+      </table>
+    </worksheet>
     <worksheet name='Renewable Energy per Housing Expense Dollar'>
       <table>
         <view>
@@ -1253,6 +1294,10 @@
             <column caption='Total RE Generation (MWh)' datatype='real' name='[v_15]' role='measure' type='quantitative' />
             <column caption='Region' datatype='string' name='[v_2]' role='dimension' type='nominal' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.19i35230qymtrh1h1rsyg0zr9jdi].[Housing Cost 750+]' />
+          <slices>
+            <column>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[Housing Cost 750+]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1260,7 +1305,7 @@
             <format attr='height' field='[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:Calculation_649644248362475529:qk]' value='27' />
           </style-rule>
           <style-rule element='cell'>
-            <format attr='width' field='[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]' value='28' />
+            <format attr='width' field='[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]' value='31' />
           </style-rule>
           <style-rule element='header'>
             <format attr='height' field='[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_2:nk]' value='100' />
@@ -1330,7 +1375,7 @@
           </strip>
         </edge>
         <edge name='right'>
-          <strip size='100'>
+          <strip size='188'>
             <card pane-specification-id='2' param='[federated.19i35230qymtrh1h1rsyg0zr9jdi].[usr:Calculation_649644248368455690:qk:7]' type='color' />
           </strip>
         </edge>
@@ -1338,6 +1383,8 @@
       <viewpoint>
         <highlight>
           <color-one-way>
+            <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[Housing Cost 750+]</field>
+            <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[Housing cost at least 1k]</field>
             <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
             <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_2:nk]</field>
             <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[usr:Calculation_649644248368455690:qk:7]</field>
@@ -1345,223 +1392,1255 @@
         </highlight>
       </viewpoint>
     </window>
+    <window class='worksheet' name='ID Set Barchart'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <selection-collection>
+          <tuple-selection>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Wyoming&quot;</value>
+                <value>844</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Wisconsin&quot;</value>
+                <value>912</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Washington&quot;</value>
+                <value>1176</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Virginia&quot;</value>
+                <value>1209</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Vermont&quot;</value>
+                <value>1068</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Utah&quot;</value>
+                <value>1049</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Texas&quot;</value>
+                <value>937</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Tennessee&quot;</value>
+                <value>795</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;South Carolina&quot;</value>
+                <value>804</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Rhode Island&quot;</value>
+                <value>1151</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Pennsylvania&quot;</value>
+                <value>920</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Oregon&quot;</value>
+                <value>1021</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Ohio&quot;</value>
+                <value>830</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;North Carolina&quot;</value>
+                <value>860</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;New York&quot;</value>
+                <value>1233</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;New Mexico&quot;</value>
+                <value>780</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;New Jersey&quot;</value>
+                <value>1512</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;New Hampshire&quot;</value>
+                <value>1255</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Nevada&quot;</value>
+                <value>1045</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Nebraska&quot;</value>
+                <value>827</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Montana&quot;</value>
+                <value>762</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Missouri&quot;</value>
+                <value>811</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Minnesota&quot;</value>
+                <value>1014</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Michigan&quot;</value>
+                <value>857</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Massachusetts&quot;</value>
+                <value>1370</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Maryland&quot;</value>
+                <value>1435</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Maine&quot;</value>
+                <value>880</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Louisiana&quot;</value>
+                <value>751</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Kansas&quot;</value>
+                <value>830</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Iowa&quot;</value>
+                <value>773</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Indiana&quot;</value>
+                <value>805</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Illinois&quot;</value>
+                <value>1056</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Idaho&quot;</value>
+                <value>831</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Hawaii&quot;</value>
+                <value>1523</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Georgia&quot;</value>
+                <value>951</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Florida&quot;</value>
+                <value>998</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;District of Columbia&quot;</value>
+                <value>1512</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Delaware&quot;</value>
+                <value>1115</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Connecticut&quot;</value>
+                <value>1395</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Colorado&quot;</value>
+                <value>1156</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;California&quot;</value>
+                <value>1419</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Arizona&quot;</value>
+                <value>952</value>
+              </tuple>
+            </tuple-reference>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[none:v_0:nk]</field>
+                  <field>[federated.19i35230qymtrh1h1rsyg0zr9jdi].[sum:v_1 (censusMedianHousingExpenses):qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;Alaska&quot;</value>
+                <value>1249</value>
+              </tuple>
+            </tuple-reference>
+          </tuple-selection>
+        </selection-collection>
+      </viewpoint>
+    </window>
   </windows>
   <thumbnails>
+    <thumbnail height='192' name='ID Set Barchart' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7EAAAOxAGVKw4b
+      AAAfKElEQVR4nO2d2ZNcyXWfv7vfqrq1V/W+AZjBzFDS2BQl00FSlESKFskgLZm0tVgyJZFe
+      9OgIR/ifcTD84OCbH/jiMO1w2A5btoIKyhJnBjOYwdoLGo3eaq+6a6YfGsAABDB9q3GLtwHk
+      9zTT+FXnOdl9+ua5JzOPJqWUKBSvKHreBigUeaICQPFKowJA8UqjAkDxSqMCQPFKY+Y5uJSS
+      OI5BU3GoyAct69egQRDgOM79/xMEfoztWGia9oRWCMEX/+Gf0nz761maoFCkJvMnQOf4mCgY
+      g1UkmnQJY4tKuUBv6FMtmQTCwkhGFGuLNKrFrIdXKKYi+7WHpmG5JUwZMpoEaFJwdLjPjY9u
+      EJsOBVuyfXuT3bv7mQ+tUExL5kugaRBC8Nlf/21Cu3m6WAJPrqLOp/bBjM5C+7LOQU625poE
+      A1xYW2YinFN1EomW0vO8tfL+T38W2pd1DvKydbYBIGL645CK9+y1/m5P0Hz7N2dqhkLxLGYb
+      ADKhe3zI1s0udrGMJiOcUpXDrauUF9/k0mp7psMrFKcx2xfwmo7rOui6TqVSxDRtRBxSqrZw
+      c198KRTnIAn+/Je+TmDV8zJB8YqT+9/hxfk2E9zThVLCU4pp51fLDN6WvEB+TaPN0a/MAyCO
+      AobDEZpVoOoVTtXvjzSab385azMUilRkHgBJHPDulY/4xTdW+dGPb3J5fY4Ik869u6ysLnPl
+      +h2W6jbt1TeZa3hZD69QTEXmAaAbFm9dvshht8/yXJtKcw5DCoxowihIWJprUa/YhGEAqABQ
+      5EvuSfAXv/JNArOWlwmKV5zcA2A4DlJpEyEw9HRvbfPWSnlSB9VTJGtCSjR46m7Zs44/K61E
+      IqVET7F9fZo5mLVfhqFTKjx9t0EmS6A4ChgOhmAVqJU/rvr6kwlu4eNEeNDrUapWHys+3D3s
+      kgh1MYVidhRde7YBIJKQd977iDcuLfKjv7zFpQtLRIlk2Oszv7SMpQsGvT6apqN1epQsHcMu
+      0G6q9/+KfMkkAHTD4hfeeo3BcMjFixvUG3VMDTqWAXFAL0xwbQu7WEHTYNg9ZOnCfBZDKxTP
+      RS45wGg0olQqIYSgN5yQxgAhBHrKtV/uWilPajB6ip2Q93OANMWd8+GXREurJV1uM2u/TEOn
+      Unp6TSr3JPib3/5DfK10qlZKmWoyz4t2FpwHv2YxB3namskSqNfrUa1WH/vaeDymWCwi4ogw
+      Adexnv7ZyKH59j/IwgyFYmoyCYDJeEzBknxwbRvDdGjXPMaaZPjBO5RbK8hozNUbu7x+aZFY
+      mAwPt6gsvclrayoPUORLJgEgk4C9owjLNPBKDvcOO7SX53Dac4RSohsWq0vz1FrzmAgOZEjB
+      zn0fnkKRfw7wlW98m0Avn6rN+4jrtNpZcB78msUc5Glr7n+GLdMgSVNZJP8f6Kt+Jv5l9Gtm
+      AXDjxnWW2lX2hzrrS0388Ri7WHziCNpQFGm+/dVZmaFQfCIzC4BoPGBrL0E3LP7Lf/4x6xff
+      wjYj/Bi6u5s01j/F5Y3FWQ2vUKRiZgEwv7TCYDTBMnWWV9cpOA7lWh0diasJKvXT1/0KxazJ
+      PQn+2u/8Hr6uzgUo8iH3JDhJEpI0myHOxXnYtNoZpYvKr/N5JvjO7RvUF1fZ2tzmzcuXHvs3
+      f3BMZFUpu8YjXxV0u0MqFQ9fL9P8pa9lYYZCMTXZPAF0je0b1wg0m7/6i/+OU21hWh6Vok7k
+      j0mMLv/75jaX1+eIpYaII5xSk0pFLX0U+ZJJAHjVJons0SwV6BoJpu0yt7DCzY+usLa+Rm84
+      YX15keb8PLqIOTg4oPSM3XkKxc+T2SXBUhKE4SPNMp5ECME3v/UHTLQ0T4K8y0DTaF/GktED
+      HTPS5uPX7JJgTfvEX/4HjCY+gXG6TqGYBakCYPf2dSqL62zfusVbb15+tjAJ6Y4iapUn9/dH
+      4QSp2cRRSLH48fIntmrMqRZJipxI9wQwLXZvXMXH5Sf/939iV9ocHHSZbzi41TY33n+XlY3L
+      eCWbo6NDCrZFrTXHwcERUjc53LmJV29QrrUZdnvYekhz5TLLc+o6FEW+pAqAUrlGIjSapRI9
+      W2A5JUxNo1orEyeC1Y2LlL0iAsml1y8TDPvcOzii1Wox8QOKGxepNur4gaRggG0ZpDzVplDM
+      lNwrwb/7e3+Ez+nN8nKvAU2hnVmqeB78msUc5OhX7pXgTrdPYKrHgSIfsrkXKA65sXkHz5Ho
+      do1Gq4GRhAyCiJJjkmDiWMZTPyvdJosqCVbkRDZPACEZDQeIGOSxT2/YxdF1jo728WoNZKIx
+      7HRxSjAIdEo6VNvLrC61MhleoTgrmQSAZhisLbcZRxpmItEdA9+PeP3yG/hBwKjb5XZ3wJuL
+      G5SkTrOuboRTnA9+LklwksREscB17Me+LoTgH//hd5jI07dF5N32c3ba9JXN/G2dXUvVl7NN
+      6n0Mw8R4egrA3f1DQqtx6vfI+w3IVNqXb9fwI2JeKr+eKwCicMDWTh8z6VBsX6RZe/LM76OI
+      OMKPBUX3460PRmmOFZUEK3LiuQJASMFwMMAWfTryiOHBFqNYx4jHSF3n1s1t1jZWCYWOrQk0
+      ERFaHtHRNpXlt3jjgjoTrMiX5woAw7BZatdIjAqJVqDsVmne/zcRB+i6Tb1RY+RHaNGEUnWJ
+      wWiI5qxR8FJ0hlQoZkzuleDf/+M/YyJP3w16Hta/KgeYzRzkaWvuAdAZjEljgRQi3bXc50Er
+      5ckbiJSthCDdNeK5+3W/RVIav6a5Hj0rWyslF9v6eFETxzGm+cmLnLMvgZKIqzc2aZRMEtOj
+      0ag/rPaG/hjdLvJgh8MTl2LJhLEf4zoWh52BapGkyATHNh8LgDQ8Rw4gCcYjOtLGkiM+PDrE
+      DyKC7j7LK6tM4pBYWBzv7bC0cgHDCBkHYEkf3XZxS01WF5unD6NQzJCzB4Cms7a+zGSS4JiS
+      IgbjsY9ecSmUyniGzsSPKdurFMplhv0DKpUao86Yeq2B46gzwYr8+bnlAA+6dTzatUMIwdgP
+      U30+7xah02inaRE6TQ6Qu1+crMHTtCjKo02q61iYj1Rc0+QAuSfBv/KF3yJ02inUeR8In0b7
+      8h0en177YviV2VaIe3c2Mb0mu1u3uHTpEsXiJxxyeSQJLjZWWFWVYEVOZBYAQrfo7W/jx3Bw
+      sM/OzRu0l5a51xtRc0zQNOr1BoP+EZZXxTKKaju0IncyCwDPK6MD1XYBXcLqxjpOsYzhlLBE
+      gF0s0z0+pN5apNGsMxqlW/srFLMk9xzgO9/7V4yTp3eQfIzcS5tTaB9M6Sy0yq/zdznu8/Du
+      +x8ROnN5m6F4RcksAN5//302lhrs9DReX/v4F3o4HOJ5z776sNxep6mSYEVOZBYANhE373Yx
+      ZcTf/M1ddE1DCInQY5rlMu9d3eL115eJhcFg/6RP8FuXlrMaXqE4E5kFwPzKOqOxj21bHO4f
+      UG/NU3RMhpMhUZRw+bULzC8tYCI4dAwKZXU1uiJ/ck+C/+R7f844TlNZfHFyYJhRuegF8msa
+      7Qt7JDILfnrlQ6LCfN5mKF5RMgmAzRtXKdUa6FaFmmdzfHxEo9Hi0b9vUgo63S7NRuOxPd2V
+      OZUEK/IjkwCwCx77u1sMx9D3I1bmyhwcHhIGCcQjRsIi6HdoL8xz3BtxvPMR5cU3VBKsyJ1M
+      AqBcqeFYBkGsMfIjXDPGcDzKJY9B94BImiSNCl69hUGMwwUKqj+Y4hyQfxL83X/JMDrf1cKz
+      aUmfLablRfPrBciC80+CP7hOXFTXoyjyIfMAeP+9d2k02jTn2+iArutIIUikxNA1Dg+PaNTr
+      6MbJ0JX2mkqCFbmReQCUvQKbmzvs3LmBMMo0PYdECK7d3OX1yytEEdz68D28+dd467WVrIdX
+      KKYi8wCotxYwTBfDgFhzMEkoFmzQHSolmzDR8dx1CpVK1kMrFFOTeQB4nvfUzW/l6pMX4Aoh
+      2GhZDG/911O/76Nnic+9Vt7P/zK/QOo8zEF6v9LOQZ5+5Z4Ev3v1JnFJ1QMU+XBqAOzcuoZd
+      rUHsUK26WJb5MLKOj48pF3QGoUu5ZGLoGkki0A0DkSSYlkkcJXS7xzSaTQI/wnEsQKIbJhpQ
+      bq2qJFiRG6cGgOGW6B3t0j+M+eloyMXX1uh3uszNLxIHA+7e6aKbFX68fYfLF5cZjScUCy5B
+      5GNgcDAIWai79EcDtIkktASH29ssXPwUr62r15+KfDk1ACqVKuWiTa0qKfeHNKplal4Fp1RG
+      E2WWl5fpdEdYts3C0hw6IMIJN7Z2WFlbxumOmJ9roCGI/ASnXKDi2BSqKglW5E/uleDv/Nk/
+      ZzBJTtXm3cZnGu3sbgU6D37NYg5e8hZJn8S7H20ivNUUymn2FZwH7Sw4D37NYg7ys/XMAdDb
+      2+FYmjiaTr1axrZtpJTouo6u6xwcHlLxPEzLIkkSkiTBti2iOMEyTxJhTdMoN5dpvv3Vs5qh
+      UDwXZ38CSIPIHzDs9/jpO3021tcJJwOqzTbrK0sEoz7/52//moWFBcxym/3N63jlIn1fsjpX
+      w/EaLLRVu1RFvpw5ANxKhfVmleNCFbfYY2GuQSjqaJpDv3OIU25y6ZLEq1TxKnXsxMereAxG
+      EeGow9K6+uVX5E/uSfA/+9Pv0R9Hp2rPRxU0vXYW+6HPg1/TJKFp5+CVrgRfubaNqK7nbYbi
+      FeVMARBHY65+tEO97tGs19BNGx0Jug5xxNVbmxS0gOr8axQdHcc2SaKISJx83tAkpu2ia+A1
+      l2i+/ZUsfVIoUnO2J4AES0s47HS59sF7NOcWEVKi2yXeXF9Cxj6+Juhcu8o4iFmcK+E6FY66
+      HebnWxwd9SgUS1xYV9uhFflypgDQDYu1Cxfo9Xo0Si5evUUSR4CGYVlsrK4QCB1DCI77Y9qt
+      KiKKKVdK9EY+Nc/Fa6ir0RX5k38S/CffpTcKTtWeiwQwpXa6iulJopju6Ow58GsWc/BKJ8E3
+      7kDtQt5mKF5RMgmA6x+8R7Veg2KLgiFwHRshJLqhc+/uXSQazUYNw7RJkpj+YECz0UDXdbzG
+      Is23v5SFGQrF1GQSAKVqncO9bfrRPe4d9XlrY55JGLKweom657I/Trh29QN008EolIhHxwjN
+      Yr5ZzWJ4heLMZBIA7bl5Ws0mUtMZjX2KBQcNMG0HTZZYrUBQKaJbDpZpIuXaw/agSeQz7h1m
+      YYZCMTWZBIBpmnC/H6tt24//o6ZjAEWv/MgXT+4FFUKwWoX9K//x1DHyTgCn1c6C8+DXLObg
+      hUiCgyDAMAwM03wsrxdJDLqJrkHoj4mlQbHgPPbZJI7RjBPNz7LVg/KnvpXWDIUiU1IHwEfv
+      v4NdaNCcqxCEYMmQnd092rUy3cTkzdc22Nq6Q3thnlt3d2g0W0x8n/FwhGtCaJfxjBg/MdDj
+      MV5jAa9gY1ouxZrqEabIh9QB0Jpf4ta1W0gjRiSSkluk3W7i6hpty2QQnLzTjsIxt6/f4Lg7
+      YWO9iR+EDIcBRtnAckx0LWZ3Zxt7IPjFNzdm6JpCcTqpC2FJkhDHMbomiRJwbAuRRMQJ2LYF
+      ukESTIilRhyFuG4ByzIZDgYUikUkoN9fj/mTMZZTwDR0PvfV38e79IVZ+qhQPJPcK8E//OEP
+      GY1GqbS6fnorpfOiTV1dnSKpe5H8mkabp19TBYAUMWEs0TWwrMebW8dxjGmaiDjkuDei2aih
+      adrDrz/LwFu7hySJSGuCQvHcFF2blfmTmwqneg0a+x3e+ajLXM0AIanWG/RHPe7tdal4Nl59
+      joYd0h/DaDQmiULsgkO55DHsHQEaB6OYOc+kVJ+nXHSI44RE5PYQUryCxI/8wZ2yDqDRqhbY
+      P96jaBUY9m4x/8YvUBvHuKUCWhKBlIRhjB6OuLW5SWtxjclkQhiEWDqUikV2tm7jqiRYcQ6Y
+      bgkkBVJqxHFEHIXYjotuGASTCZZzUv3VkAzHPl6pwHjs47guGpIoDLAclzAIAIllORiGzubd
+      o3RPgHPRHWUGN8NOdzvui+VX+ttxf65+FRyL5bmTM+m5J8E/+MEPXrokWEr58IqYNFrg3CeL
+      ML1fabUvTBJ8FqJgwtCPKZcKTyTDQgg+//V/SuWN35ilCQrFM5n5eYDtnR0MJLt3JaVSmYJt
+      EPkjvMYClZKLYdq4pdqszVAonkq6Z8nzIAVBFOMWPWwTJqMe3aHP0ZHaAarIn5k/AdY3LhIl
+      Ets6GUpKSRyFmNbJhrnIH9Hf35q1GQrFU8k9Cf7Rj37EZDI5VZskCYZhpPq+eWunTQA1TUuV
+      BL9Ifk2jzdOv5w4AKQWHB4fUm02QGkLEJ2cCpCBKJJb5bAOEENy8c5CqEjyL/syz0s7uenTl
+      V9ba514CHdy9A7bDzdvXKZhVQuFTKznEiWT33gFra6scHx1Tq5bpdHu4pTKm8CnWFqiUHJJE
+      qEqwIjeeOwk2DZ1+r4+u6+zu3kVIwd07W3x08zbzC/Mc7O4wCQLudYaUPA9LT9i8dYvNrd0s
+      7FconosMlkCSIAiwHRuERABSJICOYZzEVxRFj22ei6MIw7TQNNjaO0aIFEugvIugU2hntlRQ
+      fmWuzT0J/v73v89gMEilfVEqwTDddmh4MSrB8PL5lXkAiDhk/6jH/Hz71OgXQvBr3/hjqm+p
+      y3EV+ZB5HWBne4dCweH25jaOYxGMR1SrVQ6O+tSrDqE0iAZ9Ku0l6pUimm5iOYWszVAoUpF5
+      ABiGxnG3j5QmjZrLX//VVdYuXiD2Q4SwEVJQr7YJJ2OoFLMeXqGYisyXQFKKk0Z4hgGaRhxF
+      TEY97hwMuHxpDYmGrj1Yl0n+/le+jbv6mSxNUChSk/kTQNN0bOvjxMOybSy7TaXefkIrhGSj
+      abF/+7+d+n3Pw0VP6mKsV/hirAcc7N3BKtWplT95+RIEAY7jfKIG4M7Ipv6r353WDIUiE6YO
+      gDCWdO/u0Ds0KBRLHHeH1CoufqShJz5OqUqpYLN/eEyr2UAmEQeHHcrlEoNJhOfaiGhCoTZP
+      1XPRNB3Dsk8fWKGYAVNXgnvHB9QaVd7923fY2+/RrJQYY+BYGgd7O4wnY67f3sXQtJMbo/t9
+      3nv/Cvu9gJJrEQQTbl6/xub23Vn4o1BMxdRJsJQSDUiEQNP0xyptQgjCyZBxYtColB6W4oQQ
+      aLr+sC4g7n8WJJ/9rX+Eu/LLmTmkUEzD1EugB0nF07aZGoZBwatS+Fj8VO2D/xdCcqHlsL/1
+      P04d9zwkdSoJVkkwkT9i516H5cU5TNt+bA0VhuHD69Ef/HcSBQjdxjIeNUQShhGmabI7dqh/
+      9l9Ma4ZCkQlTB8C406dY1rj6wQ0M16JdKzKJNPR4zDgCW5csrKzTPT4i9seYlk5iVQgmY4qm
+      INJshN8nMcpcWFsANPSUBxwUiqyZOgmWIuLGrT0q5SLzlRL3ul163SP6gzFJMOCnP73CYBIC
+      cLC3w3FvROfwHu++8z6JYWMJn/44eHhRrkKRJ2dKgrNCSslnv/y72Mt/N7PvqVBMw5mT4CyQ
+      UnKh7bK/879SaF+c8wCzQvmVvTZdAEjJ0cEeulul/sgGNiklIgqRpoOpw7B7hC8tWvXKYx+P
+      Ah/dctD1J9sm745dmp/781RmKBRZk/IJILl7d4/5FZuPrm7iVVt4BYsbt2/QKnsc+pJPvfE6
+      +8dDVlcWuH7tQ6rVOn4YMh4OKdgmkVWiqIcEwsIUE4q1BWpltQ1akS8pk2CNSqXMvZ3bDCYR
+      9+5s8f6VDylWq2i6yep8lVGkEQdD9vb3+PDKVbZ3D6mWHUYTn8FoQhBFaLqDa0puXb/O1s7e
+      bD1TKFKQ+5HIv/el38FefDsvExSvOLkHwE9+8hOCMDxdmySp6wV5a6WUICVamgukhAA0tKf1
+      kD3j+DPTSomY5tbrlHOQh18PZnuqt0AiidjavsPq2jrGwx+YRMqTyq/jOMTBmNu7B1xYX8PQ
+      tce2RT/toHR1blXdC6T4ubO+2KRUcKYLgHHngL4fcbi/x2AS06p7JOGIa7f2qZZtitUWc6WT
+      1kmbt7cIgwmFsodXKDDoHoHUOA4k7aJGsb742BslhSIPpgoAs+ChBXe5ux8hkITDQ4TpUik6
+      VOpNDA0Qgq2dbWquzrXr11jeeI0oDBgPJxQLBWwTNm/fpjIxqFc2ZuOVQpGS3HOA3YPuS9gi
+      CWZy4+Z58GsWc5CDrfPNCq5tzf569NP4D//+3zEYDE/VCSlT7x/KWyvhJAFMe4GUBk+WCM8+
+      /qy0khN702lPeoSluhgrR7+eKwDiYMT1W9vML62deT3/n/7iCs23v55OPM2z6kXS5j3+edDm
+      NP5zBYDplCi4BWwC3r+6S6VokGgW4XiAV2twfHhEteKhmw79XodWo8bxMMAhwK3O0f6ZLRMK
+      xc+b514C6bpO52CPu3sdqm9dwklCnHqT8eE9bm/f49L6AsMARp19RoMeY2EgB0csvu6pAFDk
+      Tu5J8K/+5jcx5z6VlwmKV5zck+DXl6ocHl85XXge3mrMoqH0/ST4vL4t+Rlher/OcaPsR5lZ
+      AAy6h9zZO2Lj0mu41rNL1zsDk+ZnvjMrMxSKT2RmAVCutSj0hvQP7nAn1Ci7Jpquce94SNmW
+      VFrLVD13VsMrFKmY6RJI13Xu7e0SmhWSsSRBsrNzxNqiR2h4KgAUuZN/Evwb30Bvv5mXCYpX
+      nPyT4JU6x51rp+rOw0VP6bXy/iaAdBXTE1W6qvGL4tdUc/AiXYw1FSJmFCQYmsS27fv7yAW+
+      H+G6J1ukd/oGzU//0UzNUCiexWwDIAk56Ayxkgl3du+xvDhHgEb/4JiljUu06t5Mh1coTmO2
+      AWBYDI/2cL0alXKRo6MDxsLgwsoaMj79FJhCMWtyT4J/5de/jt58Iy8TFK84uSfBb6y1OO5u
+      plCm3V9/HrQzaymdUncetC+GX5kFwGg0wrENYmnh2p98aDl55LDydk+n+Xf+ICszFIqpyCwA
+      ht1jDhOJoUt645iCJtAtg9FoQqlcIZoMKXpljjt9RBiwsHGRdq2c1fAKxZmY+nboZ9Fs1un2
+      J4x7HYIgoFSuUix6tNttXEPihyHD0Yi5hXmqntoGrTgf5J8Ef/FraI3X8zJB8YqTexL85voc
+      ncHpDfPyr4Km1z7t/qOstLnOgbxf3X2J/Mo0ACajEXbBZTyaUCyVHl6elcQRmmGhaxBFEZZl
+      PfzMVk+j+fY/ydIMhSI12T4BkgnbWwfoGhz3hxjEDDpdCqUimmUz8SNqpQKDzj1KrXUWWioX
+      UORLZkkwgFuu0+30qJVMokSjVfeYjANGIx8Mm0alRJKE9PpD+r1+lkMrFGdipkmwiENu3d5m
+      deMCtvlkrAkh+MyvfRXql2ZlgkLxicz2QIxpc+m1T/7lfuvCIt3h0anfK/cEcBrtg78pGWtz
+      9+tE/FL5daYAGA2H6AhizcLQNYqFk5NdSRIRxWAZEnQb4+EffUkcC0zzyQrxVlfSfPtbZzFD
+      oXhuzvYECAbcOBxT0ALsYo139g6Yq9o4XpV7d/Zot+okpsVkHFBxdYZ+SK87ZGG+QYxONBpS
+      bS8z11RJsCJfzpQEF6oNZBzh+zGWFhGMxkhN0u0NWVvbII58MB1a9QqTyQQ/SqiWiwRBSBj6
+      NNoLGCRZ+6JQTM3MK8H7d3fQ3coTnSPhJAn+5S/8NtQuzNIEheKZ5L4VYufOLkly+tMgSQSG
+      ke6BlbdWypOuOXqatkfy5ExwmsQuf79ASpG6RdLPzoGu65hPGSdJEoyUbY+y1k6VAwyHQ3QZ
+      IYwCusbD5FcKgZAQTMY4BZfhaEzJK2Pedz6OQjTjJCkOwxDbth9+z0likIgUPygNECkNPQ9a
+      ptSm+TP0Ivr1iLZaLLA8V39CEscxppnuVzFr7XQ9wiY9NrsBTryD5la4d9Ch6ek4xRK9seSN
+      1TpbmweYpk6nP8Ikod/pUPRKYFr4fkTNK9I9vEOpfYHludo0wysUmTNVEuzVm8goxo+hYMS4
+      jo2ha0TCxLUMHK9GfzCkVjJJMGk3PPxJwHgcoFsuzVoZISL8IMEfj2flk0KRmtlWgpOQ27d3
+      WF3fwHpGJfigM0CkMEEImWpNfR60J+5Ms3NUS1Vbytsv5P3i0hnnoODY1MpPNlLJcwmUexL8
+      r//Nv2UUnL6oPA9V0NTboadoDzRNi6S8/ZpGO+0cvFCV4EcZDAb4kwleqYgwLEr3L7x6Fo/2
+      DQb4f9f207dIUigy5rkDoNvt4PeP2e/WaJZdNvd3acwv0R/56ImP5ZQY9o/xPI9hbNAoW/SP
+      OlTay8y3qln4oFCcmefeDl2xdOzGIiQhUgosS6fT6SGRxHFCFEYsLi1hWCaDXg8pExpzS1ia
+      6g6vyJ/cc4BPf/4rCG81LxMUrzi5nwn+pcvr9Cdp9gXlfdHTtNpZcB78msUcvOAXYw36A0J/
+      TLFcQrNKuOaTg/qBj+s82RDj9lGskmBFbmQSAP1eF9/vc/egR2uujong+OgI23XodQbotkut
+      UUNOhkSagQgnFMpzLC00shheoTgzmZwJblRscBpomqAgA/qThCQRxHHC8tIic60WUSIoVmpU
+      iw5hFDIaB1kMrVA8F5knwd3jY7xa/eFGuCeQgq3NTVqLK7iWwac/92Xi0nKWJigUqcn9LdBg
+      MEitTbMN9zxoT7YCy9RaSFcxVX5lr801AF6USZpWO6ub4c6DXy9bAPx/uwe65ScCnyAAAAAA
+      SUVORK5CYII=
+    </thumbnail>
     <thumbnail height='192' name='Renewable Energy per Housing Expense Dollar' width='192'>
       iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7EAAAOxAGVKw4b
-      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
-      4+2BL8faLuudNu1Gg+LwOJZRRSSD5IRn8wfFdV3mZp/SNj00KcBDxrN0MoUyH925RdB4iLf4
-      v/elEXK39hVAYWCQN+uHgW9T2WyRSGz/KCPDZQgCJssFRFensbHIrLftGTHWK9jN/udRWxVS
-      5izW+v+B237YZ1MK30Md/tOdv6/cvMqLF1ssz8/1fc/u6VRqTRorK0x89hlG6+2e+sDRCTzI
-      lodYn53dceyuLNYwu+2+6+j2KvXOLN2FLTyzP58JcwW1MUtjYQvP6rdlnBXGr3/03jL7NqzM
-      PeXh3DNse5TPfnAylR/gs88+I5lM8sWvfo6SziMlc/zkP9l2C5tmFTXxv77+5ttt8UcSgGV0
-      WN/qMFQq4Hou2WwOgHQmS0s3WJx9Snl0lLX1dcbHwxuZDoPn+biug95s4Xk+sqqhpY++2bZY
-      LDI1NYVrd/jrv/o1tz6+RmlE4+7NnRk4ntPjq68fc+PGVSpbDjdnttci9OQI1lb/VFQbGCEz
-      dZNeYhi32W9TBkZITNzE6zwjsLcAuFbSgCpiYgwxvT0ptNsbKPlRrgyWKN2+TVHZ+7PovHo1
-      zrVrw2+v7Q1i6P3rHMMT4wyO3qRNCa/X7bMlxyZIlG9S80q4ptVny01O4KmH2U53OK7e+Q6q
-      KGIVp08l0P6Tz77P1sYGV//+f7rvd48kgOpWg2QQMLcwRyY7SO61AGQ1wdTUNCPDQ1i2x+jo
-      GKIgfKs3jyiKgtgzadbqaJkkgZw4ljGkIEpMXrtOo7JConSrz+ZaHQQlxeOvfkt++rvf+l5u
-      7a/xm1/2fSaV/wj1tQDU3DC3ch0ePbL6Kr9T+XcEvVUAJgSw50Eqfo5U+PRb5+m0KQxPIudO
-      Z9+UqmmkMhlSif19XEcSgCaLrNc6DA0PYfUsArb3k0+XTezK/7l9VRnwQZBzKIn/6ii3wfd9
-      ZEWiXNQoF28SBK/fxye49Ho9+Bbv6JDkFLdmpnj0qMfNK/3eCS0zxOffKfLNE5m7N0aOfpMD
-      4LUeE7yOwrozDO7mEmJqEjFzFb/9BL/ztO/7gjZ0rgTg/uJfgefs7DdyAenev0Qo3j6Bm3Ww
-      vv5vgG2vl7e47fNR7/7bdyY5kgDKoxOUdzkNgiBAEAQGB4vYdr/KBTmHl8lgOwJ2kOu3BWk8
-      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
-      gg==
+      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
+      eNGdaxsGrtXvfxemhdB1HFvBxu++HEzXBNPGM3enF56Nq+uYlgU+ertuCF3XcWz/MhOGCZLA
+      JInn7W7+hHeIY/k8z8M0TUzTJPRkRZDnebvWiLbbbeLx+K40ryLvdDrEYrHXkrfruk9XtO0l
+      O2r5t0X+/OfXde3DlMmbLrO9dDvKMntedqgFMUIIhBCoqoqmaWiaRnF1ga+/eYTy5PPzMk2T
+      uX/7NsvrW0+/e17u6h1uf/0F1bb1VKYoypO/ZdrNJqVSZUDeKs1ama1SzTdvRRaUtrfRTefp
+      d6FQ6Onf3WaJz371JY6Qn8qeT99r1VjbLKP6pFUUuPPVV2wUK315K4pEcWOd4nYRy5We0/fZ
+      P73bwXY8X700TaVSKtJodX3lfmX2vLxe3uCzz+4g+ZaZwuO73/B4Zd03bwmH4nYJa4BuLyuz
+      lYf3ub+w7FtmqiJR3NzCsJ49j2dpVdq1OqbVo2u4vmXWadSoNlq+eWuaQmW7SLvn/6xto8NW
+      sYqiqke/IkzRQkT22J4jHImiDVj36ToOyUwG4ROO8HI8quUqDBgiW702jx/PUYS0hiQAAAr6
+      SURBVKk98ws/X0N4KCTj0V2y5+WVUonnZ2F27YTgQSQaR31ukutpDSMpxEIKuq7TMyzfvF3H
+      YnlpnmKp3p83Do16i3qt3pf3TtrdZfZi3kLWSOzhg9dCIVTlme/p+bS20aXR7OwKD3mVMgtH
+      QqiK5p/Ws6hWGzgDtlSplreYm195Ogh+Me/i+gqPHy/zberdZeZSKtfpdJ91d56X12rbPLjz
+      EMt7DUsiFVUlEvHfZ8YwTNLZNImE38IJl1KxhBbS8CsSIWSatU2+/uLewF0AyptbbFUGuPgE
+      FCbOMFbwiyx0EUIhkU6hyv1OO8swUCMRnIE7FrgoqkYy5dNvBoSQCEUTJGP+L+L64gJt3WMk
+      3x9KYRgWqXSK7Ij/kkdPVohF4iTi/S5Rz3OQZY1cYWTAgxYomoJrD9pfTVBcX2Jzu+YjcykV
+      K8TiYZwBvWg5FCY6IPrWtDzy+fSAg7EFk2dmCWFSbxs+coimclw8P+N7X912jZ7uIEn+erm2
+      xM0PrqOKIzaAXqdJo9Wh0+n6ykMhlWKxvKuv9gyJsckxXMt9OvnzIvHUCOcvzw4YuQvOXjpH
+      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
+      /38/QvsMqPODKwAAAABJRU5ErkJggg==
     </thumbnail>
   </thumbnails>
 </workbook>
