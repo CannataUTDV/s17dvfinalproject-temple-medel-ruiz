@@ -79,6 +79,14 @@ shinyServer(function(input, output) {
     geom_point(aes(x=increase, y=`Non-Hydro Renewable Percent Total Generation`, colour=PartyChange), size=2)
   ggplotly(p)
   })
+  output$plot2 <- renderPlot({
+    brush = brushOpts(id="plot_brush", delayType = "throttle", delay = 30)
+    bdf=brushedPoints(df, input$plot_brush)
+    View(bdf)
+    if( !is.null(input$plot_brush) ) {
+      df %>% dplyr::filter(x %in% bdf[, "x"]) %>% ggplot() + geom_point(aes(x=x, y=y, colour=z, size=4)) + guides(size=FALSE)
+    } 
+  })
   # End Scatter Plots Tab ___________________________________________________________
   
   # End Barchart Tab ___________________________________________________________
