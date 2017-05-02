@@ -14,6 +14,7 @@ output:
 <br></br>
 In this R notebook we visualize data from the department of energy that tracks energy production by state in 2009, from renewable energy to oil and gas. We thought this data was intresting because by joining to other data sets (by state) such as the census data we can take an in-depth look at a given state or an overall view of the energy production in the country or trends in certain regions. In the following sections we will show the steps taken to go from raw data from data.world to Tableau and Shiney visualizations.  
 <br></br>
+<center>![Visualizaiton #7](../03 Visualizations/PercentRenewableMap.png)</center>
 
 #**Data**
 <br></br>
@@ -63,12 +64,14 @@ Shiny
 
 #**Visualizaiton #4** 
 ##ALVARO viz 2: Exploring the data
+Dashboard:
 <br></br>
-<center>![Visualizaiton #4](../03 Visualizations/crosstabDashboard.png)</center>
+<center>![Visualizaiton #7](../03 Visualizations/RegionsAndUtilitiesMap.png)</center>
+<center>![Visualizaiton #7](../03 Visualizations/crosstabByOwnership.png)</center>
 <br></br>
 
 #**Visualizaiton #5** 
-##ALVARO viz 3:
+##ALVARO viz 3: Inspiration for main
 <br></br>
 <center>![Vizualization #5](../03 Visualizations/RenewablesBoxPlot.png)</center>
 <br></br>
